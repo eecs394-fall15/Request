@@ -1,23 +1,31 @@
 <div ng-controller="IndexController">
-
   <super-navbar>
     <super-navbar-title>
-      Request
+      Request Index
     </super-navbar-title>
   </super-navbar>
 
-  <div class="padding">
-    <div class="list card" ng-repeat="request in requests">
-      <div class="item">
-        <h3>{{ request.title }}</h3>
-      </div>
+  <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
+  <div ng-hide="showSpinner">
+    <ul class="list" ng-hide="requests.length == 0">
 
-      <div class="item item-body">
-        <p>{{ request.description }}</p>
-        <p>
-          <a href="#" class="subdued">Posted {{ request.during }} min ago</a>
-        </p>
-      </div>
-    </div>
+      <super-navigate location="request#show" data-params-id="{{ request.id }}" ng-repeat="request in requests">
+        <li class="item item-icon-right">
+          <span ng-bind="request['accepted_user']"></span>
+          <i class="icon super-ios-arrow-right"></i>
+        </li>
+      </super-navigate>
+
+    </ul>
+
+    <h4 ng-show="requests.length == 0" class="assertive padding">
+      No requests found. Create one?
+    </h4>
+
+    <super-modal-show location="request#new">
+      <button class="button button-full button-positive">
+        Create a new request
+      </button>
+    </super-modal-show>
   </div>
 </div>
