@@ -1,7 +1,7 @@
 /**
  * supersonic
- * Version: 1.7.7
- * Published: 2015-09-29
+ * Version: 1.7.8
+ * Published: 2015-09-30
  * Homepage: https://github.com/AppGyver/supersonic
  * License: MIT
  */
@@ -31064,15 +31064,19 @@ Bacon = require('baconjs');
 debug = require('debug')('supersonic:module:iframes');
 
 module.exports = function(window, superglobal) {
-  var IFRAME_NAME_ATTR, IFRAME_SELECTOR, IFRAME_USE_LOAD_INDICATOR_ATTR, LOAD_INDICATOR_TEMPLATE, attachToOnLoad, findAll, hideLoadIndicator, iframeContentSizeChangeEvents, initTopEventListeners, isValidFrame, observeDocumentForNewModules, observeIframeChanges, register, resize, setLoadIndicatorTemplate, showLoadIndicator, toggleIframeVisibility, waitForLoad;
+  var IFRAME_NAME_ATTR, IFRAME_SELECTOR, IFRAME_USE_LOAD_INDICATOR_ATTR, LOAD_INDICATOR_TEMPLATE, MODULE_CONTAINER_SELECTION, attachToOnLoad, findAll, findAllContainers, hideLoadIndicator, iframeContentSizeChangeEvents, initRuntimeEventListeners, initRuntimeWindow, isRuntimeWindow, isValidFrame, observeDocumentForNewModules, observeIframeChanges, register, resize, setLoadIndicatorTemplate, showLoadIndicator, toggleModuleVisibility, waitForLoad;
   IFRAME_SELECTOR = "iframe[data-module]";
+  MODULE_CONTAINER_SELECTION = ".ag__module-container";
   IFRAME_USE_LOAD_INDICATOR_ATTR = "data-module-indicate-loading";
   IFRAME_NAME_ATTR = "data-module-name";
   LOAD_INDICATOR_TEMPLATE = "<div class=\"super-module__load-indicator\">\n  <i class=\"icon super-loading-c\"></i>\n  &nbsp;\n  Loading\n  <b bind-module-name></b>...\n</div>";
 
   /*
-  Initial operations
+  Private API functionalities
    */
+  isRuntimeWindow = function() {
+    return window === superglobal;
+  };
   observeIframeChanges = function() {
     return Promise.delay(0).then(function() {
       if (window.document.body.querySelectorAll("[data-module-load-indicator-template]").length) {
@@ -31082,33 +31086,40 @@ module.exports = function(window, superglobal) {
       return findAll().map(attachToOnLoad);
     });
   };
-  toggleIframeVisibility = function() {
-    var display, iframe, iframeVisibility, _i, _len, _ref, _results;
+  toggleModuleVisibility = function() {
+    var display, moduleContainer, visibility, _i, _len, _ref, _results;
     display = {
       visible: 'block',
       hidden: 'none'
     };
     if (window.document.hidden) {
-      iframeVisibility = display.hidden;
+      visibility = display.hidden;
     } else {
-      iframeVisibility = display.visible;
+      visibility = display.visible;
     }
-    _ref = findAll();
+    _ref = findAllContainers();
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      iframe = _ref[_i];
-      _results.push(iframe.style.display = iframeVisibility);
+      moduleContainer = _ref[_i];
+      _results.push(moduleContainer.style.display = visibility);
     }
     return _results;
   };
-  initTopEventListeners = function() {
-    if (window !== superglobal) {
+  initRuntimeEventListeners = function() {
+    if (!isRuntimeWindow()) {
       return;
     }
     window.document.addEventListener("DOMContentLoaded", observeIframeChanges);
-    return window.document.addEventListener('visibilitychange', toggleIframeVisibility, false);
+    return window.document.addEventListener('visibilitychange', toggleModuleVisibility, false);
   };
-  initTopEventListeners();
+  initRuntimeWindow = function() {
+    if (!isRuntimeWindow()) {
+      return;
+    }
+    return Promise.delay(0).then(function() {
+      return toggleModuleVisibility();
+    });
+  };
   observeDocumentForNewModules = function() {
     if ((window != null ? window.MutationObserver : void 0) == null) {
       return Bacon.never();
@@ -31150,10 +31161,6 @@ module.exports = function(window, superglobal) {
   setLoadIndicatorTemplate = function(templateString) {
     return LOAD_INDICATOR_TEMPLATE = templateString;
   };
-
-  /*
-  Private API functionalities
-   */
   attachToOnLoad = function(element) {
     if (!isValidFrame(element)) {
       return;
@@ -31257,15 +31264,14 @@ module.exports = function(window, superglobal) {
       return contentDocumentBodyMutations(element).flatMap(addImageLoadEvents).merge(Bacon.later(500, element));
     };
   })();
-
-  /*
-  Public API functionalities
-   */
-  findAll = function(parent) {
-    if (parent == null) {
-      parent = window.document.body;
+  findAllContainers = function() {
+    return findAll(MODULE_CONTAINER_SELECTION);
+  };
+  findAll = function(selector) {
+    if (selector == null) {
+      selector = IFRAME_SELECTOR;
     }
-    return Array.prototype.slice.call(parent.querySelectorAll(IFRAME_SELECTOR));
+    return Array.prototype.slice.call(window.document.body.querySelectorAll(selector));
   };
   register = function(element) {
     if (!isValidFrame(element)) {
@@ -31301,6 +31307,10 @@ module.exports = function(window, superglobal) {
       return element;
     };
   })();
+
+  /*
+  Public API functionalities
+   */
   showLoadIndicator = (function() {
     var generateLoadIndicatorElement;
     generateLoadIndicatorElement = function(element) {
@@ -31334,10 +31344,13 @@ module.exports = function(window, superglobal) {
     element.style.display = "block";
     return resize(element);
   };
+
+  /*
+  Execute initial operations
+   */
+  initRuntimeEventListeners();
+  initRuntimeWindow();
   return {
-    findAll: findAll,
-    register: register,
-    resize: resize,
     showLoadIndicator: showLoadIndicator,
     hideLoadIndicator: hideLoadIndicator
   };
@@ -34943,7 +34956,12 @@ Window = (function() {
   Window.prototype.AG_VIEW_ID = 0;
 
   Window.prototype.document = {
-    addEventListener: function() {}
+    addEventListener: function() {},
+    body: {
+      querySelectorAll: function() {
+        return [];
+      }
+    }
   };
 
   return Window;
