@@ -28,7 +28,7 @@ node_modules
 bower_components
 dist
 
-/config/cloud.json
-/config/cloud-resources.raml
-/config/sandboxdb.yaml
-/dist/*
+config/cloud.json
+config/cloud-resources.raml
+config/sandboxdb.yaml
+dist/*

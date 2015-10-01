@@ -13,8 +13,8 @@ traits:
           steroidsAppId:
             type: integer
             example: 1234
-            default: 80677
-  
+            default: 80662
+
 schemas:
   - User_collection: '{"$schema":"http://json-schema.org/schema","title":"User collection","type":"object","properties":{"results":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical User representation","properties":{"address":{"type":"string"},"createdAt":{"type":"string"},"email":{"type":"string"},"objectId":{"type":"string"},"phone":{"type":"string"},"requests":{"type":"array"},"updatedAt":{"type":"string"},"username":{"type":"string"}},"required":[]}}}}'
   - User_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical User representation","properties":{"address":{"type":"string"},"createdAt":{"type":"string"},"email":{"type":"string"},"objectId":{"type":"string"},"phone":{"type":"string"},"requests":{"type":"array"},"updatedAt":{"type":"string"},"username":{"type":"string"}},"required":[]}'
@@ -186,5 +186,3 @@ resourceTypes:
   type: parse_collection
   /{id}:
     type: parse_member
-
-
