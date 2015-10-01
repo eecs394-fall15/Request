@@ -9,7 +9,7 @@
   <div ng-hide="showSpinner">
     <ul class="list" ng-hide="requests.length == 0">
 
-      <super-navigate location="request#show" data-params-id="{{ request.id }}" ng-repeat="request in requests">
+      <super-navigate location="request#show" data-params-id="{{ request.id }}" ng-repeat="request in requests | orderBy:'-createdAt' ">
         <li class="item item-icon-right">
           <span ng-bind="request['accepted_user']"></span>
           <i class="icon super-ios-arrow-right"></i>
