@@ -8,9 +8,17 @@
   <div class="padding">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
-      <h2 ng-bind="request['createdAt']"></h2>
+      <h2 ng-bind="request['accepted_user']"></h2>
       
       
+      
+       <p>author_user: <span ng-bind="request['author_user']"></span></p> 
+      
+       <p>createdAt: <span ng-bind="request['createdAt']"></span></p> 
+      
+       <p>description: <span ng-bind="request['description']"></span></p> 
+      
+       <p>location: <span ng-bind="request['location']"></span></p> 
       
        <p>objectId: <span ng-bind="request['objectId']"></span></p> 
       
