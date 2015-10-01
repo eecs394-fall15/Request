@@ -9,11 +9,11 @@ traits:
           steroidsApiKey:
             type: string
             example: exampleapikey
-            default: 4cc779c2702f130272040eeaf435ac3488d9b9fe495eaee15547567c7b6c6cf9
+            default: 22247e8e92e134a42a42b0180b1a63ee000e564adccabd1458f56de61c491095
           steroidsAppId:
             type: integer
             example: 1234
-            default: 80662
+            default: 80677
   
 schemas:
   - User_collection: '{"$schema":"http://json-schema.org/schema","title":"User collection","type":"object","properties":{"results":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical User representation","properties":{"address":{"type":"string"},"createdAt":{"type":"string"},"email":{"type":"string"},"objectId":{"type":"string"},"phone":{"type":"string"},"requests":{"type":"array"},"updatedAt":{"type":"string"},"username":{"type":"string"}},"required":[]}}}}'
@@ -59,85 +59,6 @@ resourceTypes:
                 schema: <<resourcePathName>>_member # e.g. car
 
   - dolan_db_member:
-      usage: This resourceType should be used for any built.io item
-      is: [ securedBySteroidsApiKey ]
-      get:
-        description: |
-          {
-            "action": "find"
-          }
-        responses:
-          200:
-            description: |
-              {
-                "rootKey": "object"
-              }
-            body:
-              application/json:
-                schema: <<resourcePathName>>_member # e.g. car
-      put:
-        description: |
-          {
-            "action": "update",
-            "rootKey": "object"
-          }
-        body:
-          application/json:
-            schema: <<resourcePathName>>_member
-        responses:
-          200:
-            description: |
-              {
-                "rootKey": "object"
-              }
-            body:
-              application/json:
-                schema: <<resourcePathName>>_member
-      delete:
-        description: |
-          {
-            "action": "destroy"
-          }
-        responses:
-          200:
-
-  - built_io_collection:
-      usage: This resourceType should be used for any collection of items
-      is: [ securedBySteroidsApiKey ]
-      get:
-        description: |
-          {
-            "action": "collection"
-          }
-        responses:
-          200:
-            description: |
-              {
-                "rootKey": "objects"
-              }
-            body:
-              application/json:
-                schema: <<resourcePathName>>_collection # e.g cars
-      post:
-        description: |
-          {
-            "action": "create",
-            "rootKey": "object"
-          }
-        body:
-          application/json:
-            schema: <<resourcePathName>>_member
-        responses:
-          200:
-            description: |
-              {
-                "rootKey": "object"
-              }
-            body:
-              application/json:
-                schema: <<resourcePathName>>_member # e.g. car
-
-  - built_io_member:
       usage: This resourceType should be used for any built.io item
       is: [ securedBySteroidsApiKey ]
       get:

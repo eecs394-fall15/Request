@@ -24,16 +24,7 @@ module.exports =
   # rootView:
   #   location: "example#getting-started"
 
-  preloads: [
-    {
-      id: "learn-more"
-      location: "example#learn-more"
-    }
-    {
-      id: "using-the-scanner"
-      location: "example#using-the-scanner"
-    }
-  ]
+  #preloads: []
 
   # drawers:
   #   left:

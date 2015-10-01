@@ -1,0 +1,36 @@
+<div ng-controller="ShowController">
+  <super-navbar>
+    <super-navbar-title>
+      Show
+    </super-navbar-title>
+  </super-navbar>
+
+  <div class="padding">
+    <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
+    <div ng-hide="showSpinner">
+      <h2 ng-bind="request['createdAt']"></h2>
+      
+      
+      
+       <p>objectId: <span ng-bind="request['objectId']"></span></p> 
+      
+       <p>state: <span ng-bind="request['state']"></span></p> 
+      
+       <p>title: <span ng-bind="request['title']"></span></p> 
+      
+       <p>updatedAt: <span ng-bind="request['updatedAt']"></span></p> 
+      
+
+
+      <super-modal-show location="request#edit?id={{ request.id }}">
+        <button class="button button-block button-positive">
+          Edit
+        </button>
+      </super-modal-show>
+
+      <button ng-click="remove(request.id)" class="button button-block button-negative">
+        Remove
+      </button>
+    </div>
+  </div>
+</div>
