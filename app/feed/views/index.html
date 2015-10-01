@@ -2,27 +2,20 @@
 
   <super-navbar>
     <super-navbar-title>
-      Index
+      Request
     </super-navbar-title>
   </super-navbar>
 
   <div class="padding">
-    <div class="list card">
-
-      <div class="item item-avatar">
-        <img src="mcfly.jpg">
-        <h2>Marty McFly</h2>
-        <p>November 05, 1955</p>
+    <div class="list card" data-ng-repeat="x in requests">
+      <div class="item">
+        <h3>{{ x.title }}</h3>
       </div>
 
       <div class="item item-body">
+        <p>{{ x.description }}</p>
         <p>
-          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-          and the content is from a card-body consisting of an image and paragraph text.
-        </p>
-        <p>
-          <a href="#" class="subdued">1 Like</a>
-          <a href="#" class="subdued">5 Comments</a>
+          <a href="#" class="subdued">Posted {{ x.during }} min ago</a>
         </p>
       </div>
     </div>
