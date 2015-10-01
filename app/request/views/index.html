@@ -7,8 +7,13 @@
 
   <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
   <div ng-hide="showSpinner">
-    <ul class="list" ng-hide="requests.length == 0">
+    <div class="padding">
+      <div class="list card" ng-repeat="request in requests">
+        <super-navigate class="item" location="request#show" data-params-id="{{ request.id }}">
+          <h3>{{ request.title }}</h3>
+        </super-navigate>
 
+<<<<<<< HEAD
       <super-navigate location="request#show" data-params-id="{{ request.id }}" ng-repeat="request in requests | orderBy:'-createdAt' ">
         <li class="item item-icon-right">
           <span ng-bind="request['accepted_user']"></span>
@@ -17,6 +22,14 @@
       </super-navigate>
 
     </ul>
+=======
+        <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.id }}">
+          <p>{{ request.description }}</p>
+          <p><a href="#" class="subdued">Posted {{ request.during }} min ago</a></p>
+        </super-navigate>
+      </div>
+    </div>
+>>>>>>> 027595e85a4099a14ce90a798dc101da6d3febc9
 
     <h4 ng-show="requests.length == 0" class="assertive padding">
       No requests found. Create one?
