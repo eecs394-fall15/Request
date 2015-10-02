@@ -7,16 +7,27 @@
 
   <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
   <div ng-hide="showSpinner">
-    <ul class="list" ng-hide="requests.length == 0">
+    <div class="padding">
+      <div class="list card" ng-repeat="request in requests">
+        <div class="item">
 
-      <super-navigate location="request#show" data-params-id="{{ request.id }}" ng-repeat="request in requests | orderBy:'-createdAt'">
-        <li class="item item-icon-right">
-          <span ng-bind="request['accepted_user']"></span>
-          <i class="icon super-ios-arrow-right"></i>
-        </li>
-      </super-navigate>
+          <super-navigate class="title" location="request#show" data-params-id="{{ request.id }}">
+            <h3>{{ request.title }}</h3>
+          </super-navigate>
 
-    </ul>
+          <super-navigate class="author" location="user#show" data-params-id="{{ request.author_user }}">
+            <span>{{ request.author_user }}</span>
+            <i class="icon super-ios-arrow-right"></i>
+          </super-navigate>
+        </div>
+
+        <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.id }}">
+          <p>{{ request.description }}</p>
+          <p><a href="#" class="subdued">Create At {{ request.createdAt }}</a></p>
+        </super-navigate>
+
+      </div>
+    </div>
 
     <h4 ng-show="requests.length == 0" class="assertive padding">
       No requests found. Create one?
