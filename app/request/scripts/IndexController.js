@@ -1,15 +1,21 @@
 angular
   .module('request')
-  .controller("IndexController", function ($scope, ParseUtils, supersonic) {
-    var limit = 5;
-    $scope.requests = [];
+  .controller("IndexController", function ($scope, Parse, Request, supersonic) {
+
+    $scope.requests = null;
     $scope.showSpinner = true;
-    $scope.reload = function() {
-      ParseUtils.loadRequests(limit);
-    }
-    $scope.nextPage = function() {
-      ParseUtils.loadRequests(limit, true);
-    }
-    supersonic.logger.info("----");
-    ParseUtils.loadRequests(limit);
+
+    var query = new Parse.Query(Request);
+    query.descending("createdAt");
+    query.limit(5);
+
+    query.find().then(function(requests) {
+      supersonic.logger.info("Successfully retrieved " + requests.length + " requests.");
+      $scope.$apply( function () {
+        $scope.requests = requests;
+        $scope.showSpinner = false;
+      });
+    },function(error) {
+      supersonic.logger.info("Error: " + error.code + " " + error.message);
+    });
 });

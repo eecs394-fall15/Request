@@ -1,4 +1,4 @@
 angular.module('request', [
   /* Declare any module-specific dependencies here */
-  'common', 'duScroll', 'infinite-scroll'
+  'common'
 ]);
