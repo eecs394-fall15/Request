@@ -8,25 +8,25 @@
   <div class="padding">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
-      <h2 ng-bind="request['accepted_user']"></h2>
+      <h2 ng-bind="request['title']"></h2>
       
       
       
-       <p>author_user: <span ng-bind="request['author_user']"></span></p> 
+       <p>Requested by: <span ng-bind="request['author_user']"></span></p> 
       
-       <p>createdAt: <span ng-bind="request['createdAt']"></span></p> 
+       <p>Created at: <span ng-bind="request['createdAt']"></span></p> 
       
-       <p>description: <span ng-bind="request['description']"></span></p> 
+       <p>Description: <span ng-bind="request['description']"></span></p> 
       
-       <p>location: <span ng-bind="request['location']"></span></p> 
+       <p>Location: <span ng-bind="request['location']"></span></p> 
       
        <p>objectId: <span ng-bind="request['objectId']"></span></p> 
       
-       <p>state: <span ng-bind="request['state']"></span></p> 
+       <p>State: <span ng-bind="request['state']"></span></p> 
       
-       <p>title: <span ng-bind="request['title']"></span></p> 
+       <p>Accepted by: <span ng-bind="request['accepted_user']"></span></p> 
       
-       <p>updatedAt: <span ng-bind="request['updatedAt']"></span></p> 
+       <p>Updated: <span ng-bind="request['updatedAt']"></span></p> 
       
 
 
