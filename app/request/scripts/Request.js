@@ -1,26 +1,15 @@
 angular
   .module('request')
-  .factory('Request', function(Parse) {
+  .factory('Request', function(ParseUtils, Parse) {
     var request = Parse.Object.extend("Request", {
       // Instance methods
     }, {
       // Class methods
     });
 
-    var setProperty = function(module, property) {
-      Object.defineProperty(module.prototype, property, {
-        get: function() {
-          return this.get(property);
-        },
-        set: function(value) {
-          this.set(property, value);
-        }
-      });
-    }
-
-    var properties = ['title', 'ACL', 'description', 'state', 'location', 'author_user'];
+    var properties = ['title', 'ACL', 'description', 'state', 'location', 'author_user', 'author'];
     for (var i = 0; i < properties.length; i++) {
-      setProperty(request, properties[i])
+      ParseUtils.addSetterGetter(request, properties[i])
     }
     return request;
 })
