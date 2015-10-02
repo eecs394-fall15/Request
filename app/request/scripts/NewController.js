@@ -5,8 +5,8 @@ angular
 
     $scope.submitForm = function () {
       $scope.showSpinner = true;
-      newrequest = new Request($scope.request);
-      newrequest.save().then( function () {
+      newrequest = new Request();
+      newrequest.save($scope.request).then( function () {
         supersonic.ui.modal.hide();
       });
     };
