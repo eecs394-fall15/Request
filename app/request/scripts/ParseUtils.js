@@ -1,6 +1,6 @@
 angular
   .module('request')
-  .factory('ParseUtils', function(Parse) {
+  .factory('ParseUtils', function() {
     var parseUtils = {}
     parseUtils.addSetterGetter = function(module, property) {
       Object.defineProperty(module.prototype, property, {

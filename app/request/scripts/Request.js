@@ -1,6 +1,6 @@
 angular
   .module('request')
-  .factory('Request', function(ParseUtils, Parse) {
+  .factory('Request', function(ParseUtils) {
     var request = Parse.Object.extend("Request", {
       // Instance methods
     }, {
