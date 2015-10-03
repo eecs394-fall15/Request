@@ -9,26 +9,14 @@
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
       <h2 ng-bind="request['title']"></h2>
-      
-      
-      
-       <p>Requested by: <span ng-bind="request['author_user']"></span></p> 
-      
-       <p>Created at: <span ng-bind="request['createdAt']"></span></p> 
-      
-       <p>Description: <span ng-bind="request['description']"></span></p> 
-      
-       <p>Location: <span ng-bind="request['location']"></span></p> 
-      
-       <p>objectId: <span ng-bind="request['objectId']"></span></p> 
-      
-       <p>State: <span ng-bind="request['state']"></span></p> 
-      
-       <p>Accepted by: <span ng-bind="request['accepted_user']"></span></p> 
-      
-       <p>Updated: <span ng-bind="request['updatedAt']"></span></p> 
-      
-
+       <p>Requested by: <span ng-bind="request['author_user']"></span></p>
+       <p>Created at: <span ng-bind="request['createdAt']"></span></p>
+       <p>Description: <span ng-bind="request['description']"></span></p>
+       <p>Location: <span ng-bind="request['location']"></span></p>
+       <p>objectId: <span ng-bind="request['objectId']"></span></p>
+       <p>State: <span ng-bind="request['state']"></span></p>
+       <p>Accepted by: <span ng-bind="request['accepted_user']"></span></p>
+       <p>Updated: <span ng-bind="request['updatedAt']"></span></p>
 
       <super-modal-show location="request#edit?id={{ request.id }}">
         <button class="button button-block button-positive">

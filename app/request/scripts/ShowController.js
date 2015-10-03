@@ -5,13 +5,9 @@ angular
     $scope.showSpinner = true;
     $scope.dataId = undefined;
 
-
-
     var _refreshViewData = function () {
-      
       Request.find($scope.dataId).then( function (request) {
         $scope.$apply( function () {
-          
           $scope.request = request;
           $scope.showSpinner = false;
         });
@@ -19,16 +15,13 @@ angular
     }
 
     supersonic.ui.views.current.whenVisible( function () {
-      
       if ( $scope.dataId ) {
-        
         _refreshViewData();
       }
     });
 
     supersonic.ui.views.current.params.onValue( function (values) {
       $scope.dataId = values.id;
-      
       _refreshViewData();
     });
 
