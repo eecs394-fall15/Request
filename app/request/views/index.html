@@ -1,7 +1,7 @@
 <div ng-controller="IndexController">
   <super-navbar>
     <super-navbar-title>
-      Request Index
+      Request Feed
     </super-navbar-title>
   </super-navbar>
 
@@ -18,10 +18,10 @@
 
           <div class="col col-40"></div>
 
-          <super-navigate class="author col col-30" location="user#show" data-params-id="{{ request.author_user }}">
+          <!-- <super-navigate class="author col col-30" location="user#show" data-params-id="{{ request.author_user }}">
             <span>{{ request.author_user }}</span>
             <i class="icon super-ios-arrow-right"></i>
-          </super-navigate>
+          </super-navigate> -->
         </div>
 
         <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.id }}">
