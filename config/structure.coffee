@@ -13,7 +13,7 @@ module.exports =
     {
       title: "My Requests"
       id: "myRequests"
-      location: "user#myrequested"
+      location: "request#myrequests"
     }
     {
       title: "Accepted requests"

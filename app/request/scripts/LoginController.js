@@ -9,8 +9,8 @@ angular
         supersonic.logger.info("Login Succeed for {\"user\":" + $scope.username + ", \"password\":" + $scope.password + "\"}");
         supersonic.ui.initialView.dismiss();
       }).then(function(result) {
-        $scope.error = result
-        supersonic.logger.info("Login Failed for {\"user\":" + $scope.username + ", \"password\":" + $scope.password + "\"}");
+      }).then(function(error) {
+        $scope.error = error
       });
     }
   });
