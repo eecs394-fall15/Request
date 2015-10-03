@@ -11,14 +11,14 @@ module.exports =
       location: "request#index" # Supersonic module#view type navigation
     }
     {
-      title: "My Requests"
+      title: "Requested"
       id: "myRequests"
-      location: "user#myrequested"
+      location: "request#myrequested"
     }
     {
-      title: "Accepted requests"
+      title: "Accepted"
       id: "acceptedRequests"
-      location: "user#index" # URLs are supported!
+      location: "request#myaccepted" # URLs are supported!
     }
   ]
 

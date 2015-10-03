@@ -1,6 +1,6 @@
 angular
-  .module('user')
-  .controller("myrewuestedController", function ($scope, Parse, User, Request, supersonic) {
+  .module('request')
+  .controller("myrequestedController", function ($scope, Parse, User, Request, supersonic) {
 
     $scope.requests = null;
     $scope.showSpinner = true;
