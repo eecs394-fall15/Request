@@ -1,4 +1,4 @@
-<div ng-controller="myacceptedController">
+<div ng-controller="MyAcceptedController">
   <super-navbar>
     <super-navbar-title>
       Accepted
@@ -10,12 +10,10 @@
     <div class="padding">
       <div class="list card" ng-repeat="request in requests">
         <div class="item">
-
           <super-navigate class="title" location="request#show" data-params-id="{{ request.id }}">
             <h3>{{ request.title }}</h3>
+            <p>Requested by: {{request.author_user}}</p>
           </super-navigate>
-
-          
         </div>
 
         <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.id }}">
@@ -27,13 +25,9 @@
     </div>
 
     <h4 ng-show="requests.length == 0" class="assertive padding">
-      No requests found. Create one?
+      You have not accepted any requests.
     </h4>
 
-    <super-modal-show location="request#new">
-      <button class="button button-full button-positive">
-        Create a new request
-      </button>
-    </super-modal-show>
+    
   </div>
 </div>
