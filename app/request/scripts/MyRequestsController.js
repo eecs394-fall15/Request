@@ -1,11 +1,11 @@
 angular
   .module('request')
-  .controller("MyRequestsController", function ($scope, Request, User, supersonic) {
+  .controller("MyRequestsController", function ($scope, RequestFeed, User, supersonic) {
     $scope.requests = null;
     $scope.showSpinner = true;
     supersonic.logger.info("My requests: " + User.current().requests);
 
-    var query = new Parse.Query(Request);
+    var query = new Parse.Query(RequestFeed);
     query.descending("createdAt");
     query.containedIn("objectId", User.current().requests);
 
