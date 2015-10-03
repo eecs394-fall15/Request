@@ -1,7 +1,7 @@
 angular
   .module('request')
-  .factory('ParseUtils', function() {
-    var parseUtils = {}
+  .factory('ParseUtils', function(Parse) {
+    var parseUtils = {};
     parseUtils.addSetterGetter = function(module, property) {
       Object.defineProperty(module.prototype, property, {
         get: function() {
@@ -11,7 +11,7 @@ angular
           this.set(property, value);
         }
       });
-    }
+    };
 
     return parseUtils;
-})
+});
