@@ -1,4 +1,4 @@
-<div ng-controller="IndexController">
+<div ng-controller="myrequestedController">
   <super-navbar>
     <super-navbar-title>
       Requested
@@ -15,15 +15,12 @@
             <h3>{{ request.title }}</h3>
           </super-navigate>
 
-          <super-navigate class="author" location="user#show" data-params-id="{{ request.author_user }}">
-            <span>{{ request.author_user }}</span>
-            <i class="icon super-ios-arrow-right"></i>
-          </super-navigate>
+          
         </div>
 
         <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.id }}">
           <p>{{ request.description }}</p>
-          <p><a href="#" class="subdued">Create At {{ request.createdAt }}</a></p>
+          <p><a href="#" class="subdued">Created At {{ request.createdAt }}</a></p>
         </super-navigate>
 
       </div>

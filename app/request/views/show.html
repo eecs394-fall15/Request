@@ -9,6 +9,7 @@
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
       <h2 ng-bind="request['title']"></h2>
+       <p>Author: <span ng-bind="author"></span></p>
        <p>Requested by: <span ng-bind="request['author_user']"></span></p>
        <p>Created at: <span ng-bind="request['createdAt']"></span></p>
        <p>Description: <span ng-bind="request['description']"></span></p>

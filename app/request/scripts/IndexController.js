@@ -1,13 +1,13 @@
 angular
   .module('request')
-  .controller("IndexController", function ($scope, Request, supersonic) {
+  .controller("IndexController", function ($scope, RequestFeed, supersonic) {
 
     $scope.limit = 10;
     $scope.requests = [];
     $scope.showSpinner = true;
 
     var loadRequests = function() {
-      var query = new Parse.Query(Request);
+      var query = new Parse.Query(RequestFeed);
       query.descending("createdAt");
       query.limit($scope.limit);
 
@@ -20,10 +20,11 @@ angular
       },function(error) {
         supersonic.logger.info("Error: " + error.code + " " + error.message);
       });
-    }
+    };
 
     $scope.reload = function() {
       loadRequests();
-    }
+    };
+
     loadRequests();
 });

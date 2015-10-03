@@ -1,14 +1,25 @@
 angular
   .module('request')
-  .controller("ShowController", function ($scope, Request, supersonic) {
+  .controller("ShowController", function ($scope, Request, User, supersonic) {
     $scope.request = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
+    $scope.author = '';
+
+    var findAuthor = function(userID) {
+      supersonic.logger.log("Function called!"+userID);
+      User.find(userID).then(function(user){
+        supersonic.logger.log("Successful Query!!:"+user.username);
+        $scope.author =  user.username;
+      });
+    };
+
 
     var _refreshViewData = function () {
       Request.find($scope.dataId).then( function (request) {
         $scope.$apply( function () {
           $scope.request = request;
+          $scope.author = findAuthor(request.author_user);
           $scope.showSpinner = false;
         });
       });
