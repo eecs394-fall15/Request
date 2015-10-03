@@ -1,13 +1,13 @@
 angular
   .module('request')
-  .controller("IndexController", function ($scope, RequestFeed, supersonic) {
+  .controller("IndexController", function ($scope, Parse, RequestParse, supersonic) {
 
     $scope.limit = 10;
     $scope.requests = [];
     $scope.showSpinner = true;
 
     var loadRequests = function() {
-      var query = new Parse.Query(RequestFeed);
+      var query = new Parse.Query(RequestParse);
       query.descending("createdAt");
       query.limit($scope.limit);
 
