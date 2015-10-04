@@ -1,10 +1,13 @@
 angular
   .module('request')
-  .controller("ShowController", function ($scope, Request, User, supersonic) {
+  .controller("ShowController", function ($scope, Request, UserParse, User, supersonic) {
     $scope.request = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
     $scope.author = '';
+    $scope.isAuthor = function() {
+      return UserParse.current().id == request.author_user;
+    }
 
     var findAuthor = function(userID) {
       supersonic.logger.log("Function called!"+userID);
@@ -13,7 +16,6 @@ angular
         $scope.author =  user.username;
       });
     };
-
 
     var _refreshViewData = function () {
       Request.find($scope.dataId).then( function (request) {
@@ -39,6 +41,15 @@ angular
     $scope.remove = function (id) {
       $scope.showSpinner = true;
       $scope.request.delete().then( function () {
+        supersonic.ui.layers.pop();
+      });
+    }
+
+    $scope.accept = function () {
+      $scope.showSpinner = true;
+      $scope.request.state = "accepted";
+      $scope.request.accepted_user = UserParse.current().id;
+      $scope.request.save().then( function () {
         supersonic.ui.layers.pop();
       });
     }
