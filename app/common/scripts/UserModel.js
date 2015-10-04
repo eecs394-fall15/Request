@@ -1,3 +1,3 @@
 angular
-  .module('user')
+  .module('common')
   .constant('User', supersonic.data.model('User'));

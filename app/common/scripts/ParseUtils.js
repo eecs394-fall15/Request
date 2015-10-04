@@ -1,5 +1,5 @@
 angular
-  .module('request')
+  .module('common')
   .factory('ParseUtils', function(Parse) {
     var parseUtils = {};
     parseUtils.addSetterGetter = function(module, property) {
