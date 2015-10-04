@@ -1,5 +1,5 @@
 angular
-  .module('request')
+  .module('common')
   .factory('UserParse', function(Parse, ParseUtils) {
     var properties = ['username', 'password', 'email', 'requests', 'phone', 'address', 'emailVerified'];
     for (var i = 0; i < properties.length; i++) {

@@ -9,9 +9,16 @@
   <div ng-hide="showSpinner">
     <button class="button button-full button-positive icon super-refresh" ng-click="reload()"></button>
     <div class="padding">
+
+      <super-modal-show location="request#new">
+        <button class="button button-block button-balanced">
+          <span class="icon ion-plus"></span>
+          I need to borrow...
+        </button>
+      </super-modal-show>
+
       <div class="list card" ng-repeat="request in requests">
         <div class="item row">
-
           <super-navigate class="title col col-30" location="request#show" data-params-id="{{ request.id }}">
             <h3>{{ request.title }}</h3>
           </super-navigate>

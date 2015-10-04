@@ -1,3 +1,3 @@
 angular
-  .module('request')
+  .module('common')
   .constant('Request', supersonic.data.model('Request'));
