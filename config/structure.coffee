@@ -20,6 +20,12 @@ module.exports =
       id: "acceptedRequests"
       location: "request#myaccepted" # URLs are supported!
     }
+    {
+      title: "My Profile"
+      id: "profile"
+      location: "request#profile" # URLs are supported!
+    }
+
   ]
 
   rootView:

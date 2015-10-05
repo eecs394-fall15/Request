@@ -1,0 +1,28 @@
+<div ng-controller="ProfileController">
+  <super-navbar>
+    <super-navbar-title>
+      My Profile
+    </super-navbar-title>
+  </super-navbar>
+
+  <div class="padding">
+    <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
+    <div ng-hide="showSpinner">
+      <h2 ng-bind="user['username']"></h2>
+       <p>Email: <span ng-bind="user['email']"></span></p>
+       <p>Phone: <span ng-bind="user['phone']"></span></p>
+       <p>Address: <span ng-bind="user['address']"></span></p>
+       <p>Requests: <span ng-bind="user['requests']"></span></p>
+
+      <super-modal-show location="user#edit?id={{ user.id }}">
+        <button class="button button-block button-positive">
+          Edit
+        </button>
+      </super-modal-show>
+
+      <button ng-click="logout(user.id)" location="request#login" class="button button-block button-negative">
+        Logout
+      </button>
+    </div>
+  </div>
+</div>
