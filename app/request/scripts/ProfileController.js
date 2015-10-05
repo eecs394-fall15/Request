@@ -1,6 +1,6 @@
 angular
   .module('request')
-  .controller("ProfileController", function ($scope, UserParse, , RequestParse, supersonic, Parse) {
+  .controller("ProfileController", function ($scope, UserParse, RequestParse, supersonic, Parse) {
     $scope.user = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
