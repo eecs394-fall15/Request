@@ -1,35 +1,28 @@
 angular
   .module('request')
-  .controller("ProfileController", function ($scope, UserParse, RequestParse, supersonic, Parse) {
+  .controller("ProfileController", function ($scope, UserParse, RequestParse, supersonic, Parse, User) {
     $scope.user = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
 
-    var _refreshViewData = function () {
-      User.find($scope.dataId).then( function (user) {
-        $scope.$apply( function () {
-          $scope.user = user;
-          $scope.showSpinner = false;
-        });
+     var query = new Parse.Query(UserParse);
+     query.equalTo("objectId",UserParse.current().id);
+
+     query.find().then(function(users) {
+      
+      $scope.$apply( function () {
+        $scope.user = users[0];
+        $scope.showSpinner = false;
       });
-    }
-
-    supersonic.ui.views.current.whenVisible( function () {
-      if ( $scope.dataId ) {
-        _refreshViewData();
-      }
+    },function(error) {
+      supersonic.logger.info("Error: " + error.code + " " + error.message);
     });
-
-    supersonic.ui.views.current.params.onValue( function (values) {
-      $scope.dataId = values.id;
-      _refreshViewData();
-    });
-
     
-    $scope.logout = function(id){
-      $scope.showSpinner = true;
-      supersonic.logger.info("User: " + $scope.username + "logging out i think");
+    $scope.logout = function(){
+      
+      supersonic.logger.info("User: " + $scope.username + " logging out i think");
       UserParse.logOut();
+      supersonic.logger.info("User: " + UserParse.current() + " should be null ");
       
 
       
