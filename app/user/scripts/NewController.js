@@ -6,8 +6,6 @@ angular
     $scope.submitForm = function () {
       $scope.showSpinner = true;
       newuser = new User($scope.user);
-      newuser.state = "open";
-      newuser.author_user = UserParse.current().id;
       newuser.save().then( function () {
         supersonic.ui.modal.hide();
       });

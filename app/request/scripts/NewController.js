@@ -1,15 +1,18 @@
 angular
   .module('request')
-  .controller("NewController", function ($scope, Request, supersonic) {
+  .controller("NewController", function ($scope, Request, UserParse, supersonic) {
     $scope.request = {};
 
     $scope.submitForm = function () {
+
       $scope.showSpinner = true;
       newrequest = new Request($scope.request);
       newrequest.state = "open";
+      newrequest.accepted_user = "none";
       newrequest.author_user = UserParse.current().id;
-      UserParse.current().requests.push(newrequest.id);
       newrequest.save().then( function () {
+        UserParse.current().addUnique("requests", newrequest.id);
+        UserParse.current().save();
         supersonic.ui.modal.hide();
       });
     };
