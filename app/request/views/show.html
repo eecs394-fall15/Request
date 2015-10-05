@@ -8,7 +8,7 @@
   <div class="padding">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
-      <h4>{{author}} needs to borrow.. {{request.title}}</h4>
+      <h4>{{request.author_name}} needs to borrow.. {{request.title}}</h4>
       <p>Description: <span ng-bind="request['description']"></span></p>
       <p>Created at: <span ng-bind="request['createdAt']"></span></p>
       <p>Location: <span ng-bind="request['location']"></span></p>

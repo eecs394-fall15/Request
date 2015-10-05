@@ -10,6 +10,7 @@ angular
       newrequest.state = "open";
       newrequest.accepted_user = "none";
       newrequest.author_user = UserParse.current().id;
+      newrequest.author_name = UserParse.current().get('firstName') + ' ' + UserParse.current().get('lastName');
       newrequest.save().then( function () {
         UserParse.current().addUnique("requests", newrequest.id);
         UserParse.current().save();
