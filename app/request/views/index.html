@@ -7,14 +7,10 @@
 
   <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
   <div ng-hide="showSpinner">
-    <button class="button button-full button-positive icon super-refresh" ng-click="reload()"></button>
     <div class="padding">
-
+      <button class="button button-block button-positive icon super-refresh" ng-click="reload()"></button>
       <super-modal-show location="request#new">
-        <button class="button button-block button-balanced">
-          <span class="icon ion-plus"></span>
-          I need to borrow...
-        </button>
+        <button class="button icon super-plus button-block button-balanced"></button>
       </super-modal-show>
 
       <div class="list card" ng-repeat="request in requests">
@@ -26,7 +22,7 @@
           <div class="col col-40"></div>
 
           <super-navigate class="author col col-30" location="user#show" data-params-id="{{ request.author_user }}">
-            <span>{{ request.author_user }}</span>
+            <span>{{ request.author_name }}</span>
             <i class="icon super-ios-arrow-right"></i>
           </super-navigate>
         </div>

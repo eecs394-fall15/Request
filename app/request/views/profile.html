@@ -12,17 +12,20 @@
        <p>Email: <span ng-bind="user['email']"></span></p>
        <p>Phone: <span ng-bind="user['phone']"></span></p>
        <p>Address: <span ng-bind="user['address']"></span></p>
-       <p>Requests: <span ng-bind="user['requests']"></span></p>
+       
 
       <super-modal-show location="user#edit?id={{ user.id }}">
         <button class="button button-block button-positive">
-          Edit
+          Edit Profile
         </button>
       </super-modal-show>
 
-      <button ng-click="logout(user.id)" location="request#login" class="button button-block button-negative">
+      <super-modal-show location="request#login">
+      <button ng-click="logout()" class="button button-block button-negative">
         Logout
       </button>
+     </super-modal-show>
+
     </div>
   </div>
 </div>
