@@ -1,6 +1,6 @@
 angular
   .module('request')
-  .controller("ProfileController", function ($scope, UserParse, RequestParse, supersonic, Parse) {
+  .controller("ProfileController", function ($scope, UserParse, RequestParse, supersonic) {
     $scope.user = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
@@ -25,13 +25,9 @@ angular
       _refreshViewData();
     });
 
-    
     $scope.logout = function(id){
       $scope.showSpinner = true;
       supersonic.logger.info("User: " + $scope.username + "logging out i think");
       UserParse.logOut();
-      
-
-      
     }
   });
