@@ -5,27 +5,30 @@
     </super-navbar-title>
   </super-navbar>
 
-  <div class="padding">
+  <div class="padding list card">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
       <h4>{{request.author_name}} needs to borrow.. {{request.title}}</h4>
       <p>Description: <span ng-bind="request['description']"></span></p>
       <p>Created at: <span ng-bind="request['createdAt']"></span></p>
-      <p>Location: <span ng-bind="request['location']"></span></p>
-      <p>State: <span ng-bind="request['state']"></span></p>
-      <p>Accepted by: <span ng-bind="request['accepted_user']"></span></p>
 
-      <button ng-click="accept()" class="button button-block button-balanced">Accept</button>
-
-      <!-- <super-modal-show location="request#edit?id={{ request.id }}">
-        <button class="button button-block button-positive">
-          Edit
+      <button ng-click="accept()" class="button icon super-heart button-block button-balanced">  Help {{request.author_name}}!</button>
+      <super-navigate location="user#show" data-params-id="{{request.author_user}}">
+        <button  class="button icon super-person button-block button-positive">
+          See {{request.author_name}}'s profile
         </button>
-      </super-modal-show>
+      </super-navigate>
 
-      <button ng-click="remove(request.id)" class="button button-block button-negative">
-        Remove
-      </button> -->
+      <!-- <div ng-show="isAuthor()">
+        <super-modal-show location="request#edit?id={{ request.id }}">
+          <button class="button button-block button-positive">
+            Edit
+          </button>
+        </super-modal-show>
+        <button ng-click="remove(request.id)" class="button button-block button-negative">
+          Remove
+        </button>
+      </div> -->
     </div>
   </div>
 </div>

@@ -4,6 +4,10 @@ angular
     $scope.request = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
+    
+    $scope.isAuthor = function(){
+      return (UserParse.current().id === request.author_user);
+    }
 
     var _refreshViewData = function () {
       Request.find($scope.dataId).then( function (request) {
