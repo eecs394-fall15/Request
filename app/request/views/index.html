@@ -13,15 +13,12 @@
         <button class="button icon super-plus button-block button-balanced"></button>
       </super-modal-show>
 
-      <div class="list card" ng-repeat="request in requests">
-        <div class="item row">
-          <super-navigate class="title col col-30" location="request#show" data-params-id="{{ request.id }}">
-            <h3>{{ request.title }}</h3>
+      <div class="padding list card" ng-repeat="request in requests">
+        <div class="item item-row">
+          <super-navigate location="request#show" data-params-id="{{ request.id }}">
+            <h2>{{ request.title }}</h2>
           </super-navigate>
-
-          <div class="col col-40"></div>
-
-          <super-navigate class="author col col-30" location="user#show" data-params-id="{{ request.author_user }}">
+          <super-navigate location="user#show" data-params-id="{{ request.author_user }}">
             <span>{{ request.author_name }}</span>
             <i class="icon super-ios-arrow-right"></i>
           </super-navigate>
