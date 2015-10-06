@@ -8,6 +8,7 @@
   <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
   <div ng-hide="showSpinner">
     <div class="padding">
+      <button class="button button-block button-positive icon super-refresh" ng-click="reloadMyRequested()"></button>
       <div class="list card" ng-repeat="request in requests">
         <div class="item">
           <super-navigate class="title" location="request#showmyrequest" data-params-id="{{ request.id }}">
