@@ -1,14 +1,13 @@
 angular
   .module('request')
-  .controller("MyRequestsController", function ($scope, RequestParse, UserParse, supersonic, Parse) {
+  .controller("MyRequestsController", function ($scope, RequestParse, UserParse, supersonic) {
     $scope.requests = null;
     $scope.showSpinner = true;
-    supersonic.logger.info("My requests: " + UserParse.current().requests);
 
     var loadMyRequested = function() {
       var query = new Parse.Query(RequestParse);
       query.descending("createdAt");
-      query.containedIn("objectId", UserParse.current().requests);
+      query.containedIn("author_user", [UserParse.current().id]);
 
       query.find().then(function(requests) {
         supersonic.logger.info("Successfully retrieved " + requests.length + " requests.");

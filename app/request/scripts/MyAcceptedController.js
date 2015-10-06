@@ -3,7 +3,6 @@ angular
   .controller("MyAcceptedController", function ($scope, RequestParse, UserParse, supersonic, Parse) {
     $scope.requests = null;
     $scope.showSpinner = true;
-    supersonic.logger.info("My requests: " + UserParse.current().requests);
 
     var loadMyAccepted = function() {
       var query = new Parse.Query(RequestParse);
