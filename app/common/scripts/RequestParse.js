@@ -7,7 +7,7 @@ angular
       // Class methods
     });
 
-    var properties = ['title', 'ACL', 'description', 'state', 'location', 'author_user', 'author'];
+    var properties = ['title', 'ACL', 'description', 'state', 'author_user', 'accepted_user', 'author_name'];
     for (var i = 0; i < properties.length; i++) {
       ParseUtils.addSetterGetter(request, properties[i]);
     }

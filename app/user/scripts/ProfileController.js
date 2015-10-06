@@ -10,7 +10,7 @@ angular
      query.equalTo("objectId",UserParse.current().id);
 
      query.find().then(function(users) {
-      
+
       $scope.$apply( function () {
         $scope.user = users[0];
         $scope.showSpinner = false;
@@ -18,14 +18,10 @@ angular
     },function(error) {
       supersonic.logger.info("Error: " + error.code + " " + error.message);
     });
-    
+
     $scope.logout = function(){
-      
       supersonic.logger.info("User: " + $scope.username + " logging out i think");
       UserParse.logOut();
       supersonic.logger.info("User: " + UserParse.current() + " should be null ");
-      
-
-      
     }
   });

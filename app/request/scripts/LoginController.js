@@ -8,9 +8,9 @@ angular
       UserParse.logIn($scope.username, $scope.password).then(function(user) {
         supersonic.logger.info("Login Succeed for {\"user\":" + $scope.username + ", \"password\":" + $scope.password + "\"}");
         supersonic.ui.initialView.dismiss();
-      }).then(function(result) {
-      }).then(function(error) {
-        $scope.error = error
+      }, function(error) {
+        $scope.error = error;
+        supersonic.logger.info("Login Failed for {\"user\":" + $scope.username + ", \"password\":" + $scope.password + "\"}");
       });
     }
   });
