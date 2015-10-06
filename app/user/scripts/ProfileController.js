@@ -1,9 +1,10 @@
 angular
-  .module('request')
+  .module('user')
   .controller("ProfileController", function ($scope, UserParse, RequestParse, supersonic, Parse, User) {
     $scope.user = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
+    
 
      var query = new Parse.Query(UserParse);
      query.equalTo("objectId",UserParse.current().id);
