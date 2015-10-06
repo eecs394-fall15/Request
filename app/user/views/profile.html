@@ -8,11 +8,12 @@
   <div class="padding">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
-      <h2 ng-bind="user['username']"></h2>
+      <h2 class="text-centered">{{user.firstName}} {{user.lastName}}</h2>
        <p>Email: <span ng-bind="user['email']"></span></p>
+       <p>Name: <span ng-bind="user['firstName']"></span> <span ng-bind="user['lastName']"></span></p>
        <p>Phone: <span ng-bind="user['phone']"></span></p>
        <p>Address: <span ng-bind="user['address']"></span></p>
-       
+
 
       <super-modal-show location="user#edit?id={{ user.id }}">
         <button class="button button-block button-positive">
