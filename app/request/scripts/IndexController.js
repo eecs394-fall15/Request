@@ -1,6 +1,6 @@
 angular
   .module('request')
-  .controller("IndexController", function ($scope, Parse, RequestParse, supersonic) {
+  .controller("IndexController", function ($scope, Parse, RequestParse, supersonic,UserParse) {
 
     $scope.limit = 30;
     $scope.requests = [];
@@ -11,6 +11,7 @@ angular
       query.descending("createdAt");
       query.limit($scope.limit);
       query.equalTo('state', 'open');
+      query.notEqualTo("author_user", UserParse.current().id);
 
       query.find().then(function(requests) {
         supersonic.logger.info("Successfully retrieved " + requests.length + " requests.");
