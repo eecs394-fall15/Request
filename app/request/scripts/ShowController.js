@@ -4,15 +4,13 @@ angular
     $scope.request = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
-    
-    $scope.isAuthor = function(){
-      return (UserParse.current().id === request.author_user);
-    }
+    $scope.isAuthor = null;
 
     var _refreshViewData = function () {
       Request.find($scope.dataId).then( function (request) {
         $scope.$apply( function () {
           $scope.request = request;
+          $scope.authorView = (UserParse.current().id === request.author_user);
           $scope.showSpinner = false;
         });
       });

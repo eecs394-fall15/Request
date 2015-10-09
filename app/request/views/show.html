@@ -12,14 +12,14 @@
       <p>Description: <span ng-bind="request['description']"></span></p>
       <p>Created at: <span ng-bind="request['createdAt']"></span></p>
 
-      <button ng-click="accept()" class="button icon super-heart button-block button-balanced">  Help {{request.author_name}}!</button>
+      <button ng-hide="isAuthor" ng-click="accept()" class="button icon super-heart button-block button-balanced">  Help {{request.author_name}}!</button>
       <super-navigate location="user#show" data-params-id="{{request.author_user}}">
         <button  class="button icon super-person button-block button-positive">
           See {{request.author_name}}'s profile
         </button>
       </super-navigate>
 
-      <!-- <div ng-show="isAuthor()">
+      <div ng-show="isAuthor">
         <super-modal-show location="request#edit?id={{ request.id }}">
           <button class="button button-block button-positive">
             Edit
@@ -28,7 +28,7 @@
         <button ng-click="remove(request.id)" class="button button-block button-negative">
           Remove
         </button>
-      </div> -->
+      </div>
     </div>
   </div>
 </div>
