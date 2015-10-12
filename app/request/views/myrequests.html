@@ -15,13 +15,11 @@
 
       <div class="list card" ng-repeat="request in requests">
         <div class="item">
-          <super-navigate class="title" location="request#showmyrequest" data-params-id="{{ request.id }}">
+          <super-navigate class="title" location="request#show" data-params-id="{{ request.id }}">
             <h3>{{ request.title }}</h3>
+            <p>Accepted by: {{request.accepted_name}}</p>
           </super-navigate>
         </div>
-        <super-navigate class="author col col-30" location="user#show" data-params-id="{{ request.accepted_user }}">
-            <p> Accepted by {{ request.accepted_name }}</p>
-        </super-navigate>
         <super-navigate class="item item-body" location="request#showmyrequest" data-params-id="{{ request.id }}">
           <p>{{ request.description }}</p>
           <p><a href="#" class="subdued">Created At {{ request.createdAt }}</a></p>
