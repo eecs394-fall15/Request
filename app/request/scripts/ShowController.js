@@ -38,6 +38,7 @@ angular
       $scope.showSpinner = true;
       $scope.request.state = "accepted";
       $scope.request.accepted_user = UserParse.current().id;
+      $scope.request.accepted_name = UserParse.current().get("firstName")+' '+UserParse.current().get("lastName");
       $scope.request.save().then( function () {
         supersonic.ui.layers.pop();
       });
