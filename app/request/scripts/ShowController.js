@@ -5,12 +5,14 @@ angular
     $scope.showSpinner = true;
     $scope.dataId = undefined;
     $scope.isAuthor = null;
+    $scope.isAccepted = null;
 
     var _refreshViewData = function () {
       Request.find($scope.dataId).then( function (request) {
         $scope.$apply( function () {
           $scope.request = request;
-          $scope.authorView = (UserParse.current().id === request.author_user);
+          $scope.isAuthor = (UserParse.current().id === request.author_user);
+          $scope.isAccepted = request.state === 'accepted';
           $scope.showSpinner = false;
         });
       });
