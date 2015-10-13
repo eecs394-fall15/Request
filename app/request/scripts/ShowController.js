@@ -44,5 +44,13 @@ angular
       $scope.request.save().then( function () {
         supersonic.ui.layers.pop();
       });
-    };
+      var options = {
+      message: "You just accepted a request!",
+      buttonLabel: "Close"
+      };
+
+      supersonic.ui.dialog.alert("Accepted Request", options).then(function() {
+      supersonic.logger.log("Alert closed.");
+      });
+      };
   });
