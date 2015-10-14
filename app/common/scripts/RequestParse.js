@@ -11,5 +11,14 @@ angular
     for (var i = 0; i < properties.length; i++) {
       ParseUtils.addSetterGetter(request, properties[i]);
     }
+
+    function stringCreate() {
+      var d = this.createdAt;
+      var strdate=""+d.getDate()+", "d.getMonth()+", "d.getYear();
+      return strdate;
+    }
+
+    request.stringCreatedAt = stringCreate();
+
     return request;
 });

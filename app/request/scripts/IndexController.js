@@ -21,6 +21,8 @@ angular
           $scope.showSpinner = false;
 
 
+
+
         });
 
 
@@ -36,6 +38,8 @@ angular
     $scope.reload = function() {
       loadRequests();
     };
+
+    
 
     loadRequests();
 });
