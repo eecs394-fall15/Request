@@ -6,7 +6,7 @@ angular
 
     var loadMyAccepted = function() {
       var query = new Parse.Query(RequestParse);
-      query.descending("createdAt");
+      query.descending("updatedAt");
       query.containedIn("accepted_user", [UserParse.current().id]);
 
       query.find().then(function(requests) {
