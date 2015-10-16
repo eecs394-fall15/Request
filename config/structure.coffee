@@ -12,12 +12,12 @@ module.exports =
     }
     {
       title: "Requested"
-      id: "myRequests"
+      id: "requested"
       location: "request#myrequests"
     }
     {
       title: "Accepted"
-      id: "acceptedRequests"
+      id: "accepted"
       location: "request#myaccepted" # URLs are supported!
     }
     {

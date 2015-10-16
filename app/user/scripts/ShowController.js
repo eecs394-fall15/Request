@@ -12,7 +12,7 @@ angular
           $scope.showSpinner = false;
         });
       });
-    }
+    };
 
     supersonic.ui.views.current.whenVisible( function () {
       if ( $scope.dataId ) {
@@ -25,10 +25,29 @@ angular
       _refreshViewData();
     });
 
+    $scope.email = function() {
+      supersonic.app.openURL("mailto:"+$scope.user.email+"?subject=Request");
+    };
+
+    $scope.call = function() {
+      supersonic.app.openURL("tel:"+$scope.user.phone);
+    };
+
+    $scope.text = function() {
+      supersonic.app.openURL("sms:"+$scope.user.phone);
+    };
+
+    $scope.map = function() {
+      var address = $scope.user.address.replace(/ /g , "%20");
+      supersonic.logger.log(address);
+      supersonic.app.openURL("http://maps.google.com/maps?daddr="+address);
+    };
+
+
     $scope.remove = function (id) {
       $scope.showSpinner = true;
       $scope.user.delete().then( function () {
         supersonic.ui.layers.pop();
       });
-    }
+    };
   });
