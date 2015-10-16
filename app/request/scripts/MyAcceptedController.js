@@ -1,28 +1,13 @@
 angular
   .module('request')
-  .controller("MyAcceptedController", function ($scope, RequestParse, UserParse, supersonic, Parse) {
+  .controller("MyAcceptedController", function ($rootScope, $scope, RequestHelper) {
     $scope.requests = null;
     $scope.showSpinner = true;
 
-    var loadMyAccepted = function() {
-      var query = new Parse.Query(RequestParse);
-      query.descending("createdAt");
-      query.containedIn("accepted_user", [UserParse.current().id]);
+    $rootScope.$on('acceptedrequest', function(event, data) {
+      $scope.requests = data;
+      $scope.showSpinner = false;
+    });
 
-      query.find().then(function(requests) {
-        supersonic.logger.info("Successfully retrieved " + requests.length + " requests.");
-        $scope.$apply( function () {
-          $scope.requests = requests;
-          $scope.showSpinner = false;
-        });
-      },function(error) {
-        supersonic.logger.info("Error: " + error.code + " " + error.message);
-      });
-    }
-
-    $scope.reloadMyAccepted = function() {
-      loadMyAccepted();
-    }
-
-    loadMyAccepted();
+    RequestHelper.acceptedRequests();
 });
