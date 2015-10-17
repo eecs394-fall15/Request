@@ -9,5 +9,7 @@ angular
       $scope.showSpinner = false;
     });
 
-    RequestHelper.acceptedRequests();
+    supersonic.ui.views.current.whenVisible(function() {
+      RequestHelper.acceptedRequests();
+    });
 });
