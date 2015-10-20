@@ -1,6 +1,6 @@
 angular
   .module('request')
-  .controller("ShowController", function ($scope, Request, UserParse, User, supersonic) {
+  .controller("ShowController", function ($scope, Request, UserParse, User, supersonic,Twilio) {
     $scope.request = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;

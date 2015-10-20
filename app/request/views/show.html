@@ -10,7 +10,7 @@
     <div ng-hide="showSpinner">
       <h4>{{request.author_name}} needs to borrow.. {{request.title}}</h4>
       <p>Description: <span ng-bind="request['description']"></span></p>
-      <p>Created at: <span ng-bind="request['createdAt']"></span></p>
+      <p>Created <span ng-bind="request['stringCreatedAt']"></span></p>
 
       <div ng-hide="isAuthor">
         <button ng-click="accept()" class="button icon super-heart button-block button-balanced">  Help {{request.author_name}}!</button>
@@ -29,17 +29,29 @@
             </button>
           </super-navigate>
         </div>
-        <super-modal-show location="request#edit?id={{ request.id }}">
-          <button class="button button-block button-positive">
-            Edit
+        <div class="row">
+
+          <div class="col">
+            <super-modal-show location="request#edit?id={{ request.id }}">
+              <button class="button button-block button-positive">
+                Edit
+               </button>
+            </super-modal-show>
+          </div>
+
+          <div class="col">
+            <button ng-click="remove(request.id)" class="button button-block button-negative">
+              Cancel
+            </button>
+          </div>
+
+        </div>
+
+          <button ng-click="close(request.id)" ng-show="isAccepted" class="button button-block button-negative">
+            Done
           </button>
-        </super-modal-show>
-        <button ng-click="remove(request.id)" class="button button-block button-negative">
-          Cancel
-        </button>
-        <button ng-click="close(request.id)" ng-show="isAccepted" class="button button-block button-negative">
-          Done
-        </button>
+        
+
       </div>
     </div>
   </div>
