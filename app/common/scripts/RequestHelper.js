@@ -28,7 +28,7 @@ angular
     requestHelper.feedRequestsQuery = function() {
       var query = new Parse.Query(RequestParse);
       supersonic.logger.info("After Initiating Query.");
-      query.descending("createdAt");
+      query.descending("updatedAt");
       query.limit(30);
       query.equalTo('state', 'open');
       return query;
@@ -50,6 +50,15 @@ angular
       runQuery('acceptedrequest', requestHelper.acceptedRequestsQuery());
     };
 
-    return requestHelper;
-  })
+    requestHelper.diffRequests = function(oldReqs, newReqs) {
+      var lastUpdatedTime = oldReqs[0].updatedAt;
+      for (var i = 0; i < newReqs.length; i++) {
+        if (newReqs[i].updatedAt <= lastUpdatedTime) {
+          return newReqs.slice(0, i);
+        }
+      }
+      return newReqs;
+    }
 
+    return requestHelper;
+  });
