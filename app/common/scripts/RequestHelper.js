@@ -5,6 +5,7 @@ angular
 
     var runQuery = function(eventName, query) {
       query.find().then(function(requests) {
+
         supersonic.logger.info("Successfully retrieved " + requests.length + " requests.");
         var i=0; var timeDiff=0; var mins=0; var hrs=0; var days=0; var showTime;
         for(i=0;i<requests.length;i++){
@@ -28,34 +29,48 @@ angular
         }
 
 
+
         $rootScope.$broadcast(eventName, requests);
       },function(error) {
         supersonic.logger.info("Error: " + error.code + " " + error.message);
       });
     };
 
-    requestHelper.myRequests = function() {
+    requestHelper.myRequestsQuery = function() {
       var query = new Parse.Query(RequestParse);
       query.descending("createdAt");
+      query.notEqualTo('state', 'closed');
       query.containedIn("author_user", [UserParse.current().id]);
-      runQuery('myrequest', query);
+      return query;
     };
 
-    requestHelper.feedRequests = function() {
+    requestHelper.myRequests = function() {
+      runQuery('myrequest', requestHelper.myRequestsQuery());
+    };
+
+    requestHelper.feedRequestsQuery = function() {
       var query = new Parse.Query(RequestParse);
       supersonic.logger.info("After Initiating Query.");
       query.descending("createdAt");
       query.limit(30);
       query.equalTo('state', 'open');
-      runQuery('feedrequest', query);
+      return query;
     };
 
-    requestHelper.acceptedRequests = function() {
+    requestHelper.feedRequests = function() {
+      runQuery('feedrequest', requestHelper.feedRequestsQuery());
+    };
+
+    requestHelper.acceptedRequestsQuery = function() {
       var query = new Parse.Query(RequestParse);
       query.descending("createdAt");
       query.containedIn("accepted_user", [UserParse.current().id]);
       query.equalTo('state', 'accepted');
-      runQuery('acceptedrequest', query);
+      return query;
+    };
+
+    requestHelper.acceptedRequests = function() {
+      runQuery('acceptedrequest', requestHelper.acceptedRequestsQuery());
     };
 
     return requestHelper;

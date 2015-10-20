@@ -36,6 +36,14 @@ angular
       });
     };
 
+    $scope.close = function (id) {
+      $scope.showSpinner = true;
+      $scope.request.state = "closed";
+      $scope.request.save().then( function () {
+        supersonic.ui.layers.pop();
+      });
+    };
+
     $scope.accept = function () {
       $scope.showSpinner = true;
       $scope.request.state = "accepted";
@@ -44,35 +52,14 @@ angular
       $scope.request.save().then( function () {
         supersonic.ui.layers.pop();
       });
+
       var options = {
-      message: "You just accepted a request!",
-      buttonLabel: "Close"
+        message: "You just accepted a request!",
+        buttonLabel: "Close"
       };
 
       supersonic.ui.dialog.alert("Accepted Request", options).then(function() {
-      supersonic.logger.log("Alert closed.");
+        supersonic.logger.log("Alert closed.");
       });
-
-      supersonic.logger.info(Twilio);
-
-      // Twilio.create('Messages', {
-      //       to:   "+12244102478",
-      //       from: "+15005550006",   
-      //       body: "This is a test! yay!"
-      //   })
-      //   .success(function (data, status, headers, config) {
-      //     supersonic.logger.info("twilio sent");
-      //       // Success - do something
-      //   })
-      //   .error(function (data, status, headers, config) {
-      //     supersonic.logger.info(data);
-      //     supersonic.logger.info(status);
-      //     supersonic.logger.info(headers);
-      //     supersonic.logger.info(config);
-      //     supersonic.logger.info("twilio failed");
-      //       // Failure - do something
-      //   });
-
-
-      };
+    };
   });
