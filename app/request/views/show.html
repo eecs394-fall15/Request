@@ -37,6 +37,9 @@
         <button ng-click="remove(request.id)" class="button button-block button-negative">
           Cancel
         </button>
+        <button ng-click="close(request.id)" ng-show="isAccepted" class="button button-block button-negative">
+          Done
+        </button>
       </div>
     </div>
   </div>

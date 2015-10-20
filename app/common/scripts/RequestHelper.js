@@ -16,6 +16,7 @@ angular
     requestHelper.myRequestsQuery = function() {
       var query = new Parse.Query(RequestParse);
       query.descending("createdAt");
+      query.notEqualTo('state', 'closed');
       query.containedIn("author_user", [UserParse.current().id]);
       return query;
     };

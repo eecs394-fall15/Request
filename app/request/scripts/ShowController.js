@@ -36,6 +36,14 @@ angular
       });
     };
 
+    $scope.close = function (id) {
+      $scope.showSpinner = true;
+      $scope.request.state = "closed";
+      $scope.request.save().then( function () {
+        supersonic.ui.layers.pop();
+      });
+    };
+
     $scope.accept = function () {
       $scope.showSpinner = true;
       $scope.request.state = "accepted";
@@ -44,13 +52,14 @@ angular
       $scope.request.save().then( function () {
         supersonic.ui.layers.pop();
       });
+
       var options = {
-      message: "You just accepted a request!",
-      buttonLabel: "Close"
+        message: "You just accepted a request!",
+        buttonLabel: "Close"
       };
 
       supersonic.ui.dialog.alert("Accepted Request", options).then(function() {
-      supersonic.logger.log("Alert closed.");
+        supersonic.logger.log("Alert closed.");
       });
-      };
+    };
   });
