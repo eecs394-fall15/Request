@@ -16,12 +16,12 @@
       </button>
       <div class="list card" ng-repeat="request in requests">
         <div class="item">
-          <super-navigate class="title" location="request#show" data-params-id="{{ request.id }}">
+          <super-navigate class="title" location="request#show" data-params-id="{{ request.objectId }}">
             <h3>{{ request.title }}</h3>
             <p>Requested by: {{request.author_name}}</p>
           </super-navigate>
         </div>
-        <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.id }}">
+        <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.objectId }}">
           <p>{{ request.description }}</p>
           <p><a href="#" class="subdued">{{ request.stringCreatedAt }}</a></p>
         </super-navigate>

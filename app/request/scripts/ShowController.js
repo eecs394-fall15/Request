@@ -25,7 +25,9 @@ angular
     });
 
     supersonic.ui.views.current.params.onValue( function (values) {
+      supersonic.logger.info(values.id);
       $scope.dataId = values.id;
+      supersonic.logger.info($scope.dataId);
       _refreshViewData();
     });
 
