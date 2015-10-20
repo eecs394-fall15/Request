@@ -1,6 +1,6 @@
 angular
   .module('request')
-  .controller("ShowController", function ($scope, Request, UserParse, User, supersonic) {
+  .controller("ShowController", function ($scope, Request, UserParse, User, supersonic,Twilio) {
     $scope.request = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
@@ -52,5 +52,27 @@ angular
       supersonic.ui.dialog.alert("Accepted Request", options).then(function() {
       supersonic.logger.log("Alert closed.");
       });
+
+      supersonic.logger.info(Twilio);
+
+      // Twilio.create('Messages', {
+      //       to:   "+12244102478",
+      //       from: "+15005550006",   
+      //       body: "This is a test! yay!"
+      //   })
+      //   .success(function (data, status, headers, config) {
+      //     supersonic.logger.info("twilio sent");
+      //       // Success - do something
+      //   })
+      //   .error(function (data, status, headers, config) {
+      //     supersonic.logger.info(data);
+      //     supersonic.logger.info(status);
+      //     supersonic.logger.info(headers);
+      //     supersonic.logger.info(config);
+      //     supersonic.logger.info("twilio failed");
+      //       // Failure - do something
+      //   });
+
+
       };
   });
