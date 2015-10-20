@@ -5,8 +5,7 @@ angular
 
     var runQuery = function(eventName, query) {
       query.find().then(function(requests) {
-
-        supersonic.logger.info("Successfully retrieved " + requests.length + " requests.");
+        supersonic.logger.info(requests.length + " requests retrieved.");
         var i=0; var timeDiff=0; var mins=0; var hrs=0; var days=0; var showTime;
         for(i=0;i<requests.length;i++){
           timeDiff=(new Date() - requests[i].createdAt);
@@ -18,17 +17,14 @@ angular
             showTime=days + " days ago";
           }
           else if (hrs>0){
-            showTime=hours+ " hrs ago";
+            showTime=hrs+ " hrs ago";
           }
           else{
             showTime=mins+ " mins ago";
           }
 
-          supersonic.logger.info(showTime);
           requests[i].stringCreatedAt=showTime;
         }
-
-
 
         $rootScope.$broadcast(eventName, requests);
       },function(error) {
@@ -38,7 +34,7 @@ angular
 
     requestHelper.myRequestsQuery = function() {
       var query = new Parse.Query(RequestParse);
-      query.descending("createdAt");
+      query.descending("updatedAt");
       query.notEqualTo('state', 'closed');
       query.containedIn("author_user", [UserParse.current().id]);
       return query;
@@ -52,8 +48,9 @@ angular
       var query = new Parse.Query(RequestParse);
       supersonic.logger.info("After Initiating Query.");
       query.descending("updatedAt");
-      query.limit(30);
       query.equalTo('state', 'open');
+      query.limit(30);
+      query.notEqualTo('author_user', UserParse.current().id);
       return query;
     };
 
@@ -63,7 +60,7 @@ angular
 
     requestHelper.acceptedRequestsQuery = function() {
       var query = new Parse.Query(RequestParse);
-      query.descending("createdAt");
+      query.descending("updatedAt");
       query.containedIn("accepted_user", [UserParse.current().id]);
       query.equalTo('state', 'accepted');
       return query;
@@ -73,14 +70,15 @@ angular
       runQuery('acceptedrequest', requestHelper.acceptedRequestsQuery());
     };
 
-    requestHelper.diffRequests = function(oldReqs, newReqs) {
-      var lastUpdatedTime = oldReqs[0].updatedAt;
+    requestHelper.updatedRequests = function(oldReqs, newReqs) {
+      var lastUpdatedTime = Date.parse(oldReqs[0].updatedAt);
+      var updatedRequests = [];
       for (var i = 0; i < newReqs.length; i++) {
-        if (newReqs[i].updatedAt <= lastUpdatedTime) {
-          return newReqs.slice(0, i);
+        if (newReqs[i].updatedAt > lastUpdatedTime) {
+          updatedRequests.push(newReqs[i]);
         }
       }
-      return newReqs;
+      return updatedRequests;
     }
 
     return requestHelper;

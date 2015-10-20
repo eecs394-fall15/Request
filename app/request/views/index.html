@@ -12,22 +12,20 @@
       <super-modal-show location="request#new">
         <button class="button icon super-plus button-block button-balanced"></button>
       </super-modal-show>
-      <button class="button icon button-block button-balanced" ng-hide="diffRequests.length===0" ng-click="reload()">{{ diffRequests.length }} requests status</button>
+      <button class="button icon button-block button-balanced" ng-hide="diffRequests.length===0" ng-click="reload()">
+        {{ diffRequests.length }} new updates
+      </button>
 
       <div class="padding list card" ng-repeat="request in requests">
 
         <div class="item item-row">
-
           <super-navigate location="user#show" data-params-id="{{ request.author_user }}">
             <span>{{ request.author_name }}</span>
-            
           </super-navigate>
 
           <super-navigate location="request#show" data-params-id="{{ request.id }}">
             <h2>{{ request.title }}</h2>
           </super-navigate>
-
-
         </div>
 
         <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.id }}">

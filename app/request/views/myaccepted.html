@@ -8,6 +8,9 @@
   <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
   <div ng-hide="showSpinner">
     <div class="padding">
+      <button class="button icon button-block button-balanced" ng-hide="diffRequests.length===0" ng-click="reload()">
+        {{ diffRequests.length }} new updates
+      </button>
       <div class="list card" ng-repeat="request in requests">
         <div class="item">
           <super-navigate class="title" location="request#show" data-params-id="{{ request.id }}">
