@@ -3,15 +3,15 @@
     <super-navbar-title>
       Feed
     </super-navbar-title>
+    <super-navbar-button side="right" ng-click="create()" rv-text="Create">
+      Create
+    </super-navbar-button>
   </super-navbar>
 
   <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
   <div ng-hide="showSpinner">
     <div class="padding">
 
-      <super-modal-show location="request#new">
-        <button class="button icon super-plus button-block button-balanced"></button>
-      </super-modal-show>
       <button class="button icon button-block button-balanced" ng-hide="diffRequests.length===0" ng-click="reload()">
         {{ diffRequests.length }} new updates
       </button>

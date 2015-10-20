@@ -7,6 +7,11 @@ angular
     $scope.initialized = false;
     $scope.showSpinner = false;
 
+    $scope.create = function() {
+      var createView = new supersonic.ui.View("request#new");
+      supersonic.ui.modal.show(createView, {animate: true});
+    };
+
     $scope.reload = function() {
       $scope.requests = JSON.parse(JSON.stringify($scope.newRequests));
       $scope.diffRequests = [];
