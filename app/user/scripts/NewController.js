@@ -6,10 +6,9 @@ angular
     $scope.submitForm = function () {
       $scope.showSpinner = true;
       UserParse.signUp($scope.user.username, $scope.user.password, {
-        sex: $scope.user.sex,
-        address: $scope.user.sex,
-        phone: $scope.phone,
-        email: $scope.email,
+        address: $scope.user.address,
+        phone: $scope.user.phone,
+        email: $scope.user.email,
         request: [],
         ACL: new Parse.ACL()
       }).then(function () {
