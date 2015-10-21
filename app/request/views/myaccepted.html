@@ -3,21 +3,27 @@
     <super-navbar-title>
       Accepted
     </super-navbar-title>
+    <super-navbar-button side="right" ng-click="create()" rv-text="Create">
+      Create
+    </super-navbar-button>
   </super-navbar>
 
   <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
   <div ng-hide="showSpinner">
     <div class="padding">
+      <button class="button icon button-block button-balanced" ng-hide="diffRequests.length===0" ng-click="reload()">
+        {{ diffRequests.length }} new updates
+      </button>
       <div class="list card" ng-repeat="request in requests">
         <div class="item">
-          <super-navigate class="title" location="request#show" data-params-id="{{ request.id }}">
+          <super-navigate class="title" location="request#show" data-params-id="{{ request.objectId }}">
             <h3>{{ request.title }}</h3>
             <p>Requested by: {{request.author_name}}</p>
           </super-navigate>
         </div>
-        <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.id }}">
+        <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.objectId }}">
           <p>{{ request.description }}</p>
-          <p><a href="#" class="subdued">Created At {{ request.createdAt }}</a></p>
+          <p><a href="#" class="subdued">{{ request.stringCreatedAt }}</a></p>
         </super-navigate>
 
       </div>

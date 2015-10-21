@@ -1,13 +1,33 @@
 angular
   .module('request')
-  .controller("IndexController", function ($rootScope, $scope, RequestHelper) {
+  .controller("IndexController", function ($rootScope, $scope, $timeout, RequestHelper) {
     $scope.requests = [];
-    $scope.showSpinner = true;
+    $scope.newRequests = [];
+    $scope.diffRequests = [];
+    $scope.initialized = false;
+    $scope.showSpinner = false;
 
-    $rootScope.$on('feedrequest', function(event, data) {
-      $scope.requests = data;
-      $scope.showSpinner = false;
+    $scope.create = function() {
+      var createView = new supersonic.ui.View("request#new");
+      supersonic.ui.modal.show(createView, {animate: true});
+    };
+
+    $scope.reload = function() {
+      $scope.requests = JSON.parse(JSON.stringify($scope.newRequests));
+      $scope.diffRequests = [];
+    };
+
+    $rootScope.$on('feedrequest', function(event, requests) {
+      if (!$scope.initialized) {
+        $scope.requests = JSON.parse(JSON.stringify(requests));
+        $scope.initialized = true;
+      }
+      $scope.newRequests = requests;
+      $scope.diffRequests = RequestHelper.updatedRequests($scope.requests, $scope.newRequests);
     });
 
-    RequestHelper.feedRequests();
+    (function tick() {
+      RequestHelper.feedRequests();
+      $timeout(tick, 10000);
+    })();
 });

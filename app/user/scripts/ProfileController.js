@@ -4,7 +4,7 @@ angular
     $scope.user = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
-    
+
 
      var query = new Parse.Query(UserParse);
      query.equalTo("objectId",UserParse.current().id);
@@ -23,5 +23,6 @@ angular
       supersonic.logger.info("User: " + $scope.username + " logging out i think");
       UserParse.logOut();
       supersonic.logger.info("User: " + UserParse.current() + " should be null ");
-    }
+    };
+
   });

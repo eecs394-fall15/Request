@@ -5,37 +5,81 @@ angular
 
     var runQuery = function(eventName, query) {
       query.find().then(function(requests) {
-        supersonic.logger.info("Successfully retrieved " + requests.length + " requests.");
+        supersonic.logger.info(requests.length + " requests retrieved.");
+        var i=0; var timeDiff=0; var mins=0; var hrs=0; var days=0; var showTime;
+        for(i=0;i<requests.length;i++){
+          timeDiff=(new Date() - requests[i].createdAt);
+          mins=Math.floor((timeDiff/ (1000*60))%60);
+          hrs=Math.floor((timeDiff / (1000*60*60)) % 24);
+          days=Math.floor(timeDiff / (1000*60*60*24));
+
+          if(days>0){
+            showTime=days + " days ago";
+          }
+          else if (hrs>0){
+            showTime=hrs+ " hrs ago";
+          }
+          else{
+            showTime=mins+ " mins ago";
+          }
+
+          requests[i].stringCreatedAt=showTime;
+        }
+
         $rootScope.$broadcast(eventName, requests);
       },function(error) {
         supersonic.logger.info("Error: " + error.code + " " + error.message);
       });
     };
 
-    requestHelper.myRequests = function() {
+    requestHelper.myRequestsQuery = function() {
       var query = new Parse.Query(RequestParse);
-      query.descending("createdAt");
+      query.descending("updatedAt");
+      query.notEqualTo('state', 'closed');
       query.containedIn("author_user", [UserParse.current().id]);
-      runQuery('myrequest', query);
+      return query;
+    };
+
+    requestHelper.myRequests = function() {
+      runQuery('myrequest', requestHelper.myRequestsQuery());
+    };
+
+    requestHelper.feedRequestsQuery = function() {
+      var query = new Parse.Query(RequestParse);
+      supersonic.logger.info("After Initiating Query.");
+      query.descending("updatedAt");
+      query.equalTo('state', 'open');
+      query.limit(30);
+      query.notEqualTo('author_user', UserParse.current().id);
+      return query;
     };
 
     requestHelper.feedRequests = function() {
+      runQuery('feedrequest', requestHelper.feedRequestsQuery());
+    };
+
+    requestHelper.acceptedRequestsQuery = function() {
       var query = new Parse.Query(RequestParse);
-      supersonic.logger.info("After Initiating Query.");
-      query.descending("createdAt");
-      query.limit(30);
-      query.equalTo('state', 'open');
-      runQuery('feedrequest', query);
+      query.descending("updatedAt");
+      query.containedIn("accepted_user", [UserParse.current().id]);
+      query.equalTo('state', 'accepted');
+      return query;
     };
 
     requestHelper.acceptedRequests = function() {
-      var query = new Parse.Query(RequestParse);
-      query.descending("createdAt");
-      query.containedIn("accepted_user", [UserParse.current().id]);
-      query.equalTo('state', 'accepted');
-      runQuery('acceptedrequest', query);
+      runQuery('acceptedrequest', requestHelper.acceptedRequestsQuery());
     };
 
-    return requestHelper;
-  })
+    requestHelper.updatedRequests = function(oldReqs, newReqs) {
+      var lastUpdatedTime = Date.parse(oldReqs[0].updatedAt);
+      var updatedRequests = [];
+      for (var i = 0; i < newReqs.length; i++) {
+        if (newReqs[i].updatedAt > lastUpdatedTime) {
+          updatedRequests.push(newReqs[i]);
+        }
+      }
+      return updatedRequests;
+    }
 
+    return requestHelper;
+  });
