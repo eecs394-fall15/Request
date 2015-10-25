@@ -10,6 +10,7 @@
 
   <div class="padding">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
+    <div ng-show="error" class="alert alert-danger">{{ error }}</div>
     <form ng-hide="showSpinner" ng-submit="submitForm()" ng-include="'_form.html'"></form>
   </div>
 </div>
