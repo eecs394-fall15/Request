@@ -9,7 +9,8 @@ angular
         address: $scope.user.address,
         phone: $scope.user.phone,
         email: $scope.user.email,
-        request: [],
+        firstName: $scope.user.firstName,
+        lastName: $scope.user.lastName, 
         ACL: new Parse.ACL()
       }).then(function () {
         supersonic.ui.modal.hide();
