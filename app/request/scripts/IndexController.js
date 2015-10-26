@@ -1,6 +1,6 @@
 angular
   .module('request')
-  .controller("IndexController", function ($rootScope, $scope, $timeout, RequestHelper) {
+  .controller("IndexController", function ($rootScope, $scope, $timeout, RequestHelper,UserParse) {
     $scope.requests = [];
     $scope.newRequests = [];
     $scope.diffRequests = [];
@@ -8,8 +8,26 @@ angular
     $scope.showSpinner = false;
 
     $scope.create = function() {
-      var createView = new supersonic.ui.View("request#new");
-      supersonic.ui.modal.show(createView, {animate: true});
+      
+
+      if(UserParse.current().points < 5){
+        
+            var options = {
+            message: "You need at least 5 points to make a request!",
+            buttonLabel: "Close"
+          };
+
+          supersonic.ui.dialog.alert("Creating Request", options).then(function() {
+            supersonic.logger.log("Alert closed.");
+          });
+      }
+      else{
+        
+        var createView = new supersonic.ui.View("request#new");
+        supersonic.ui.modal.show(createView, {animate: true});
+
+      }
+      
     };
 
     $scope.reload = function() {

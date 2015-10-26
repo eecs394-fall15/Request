@@ -1,6 +1,6 @@
 angular
   .module('request')
-  .controller("ShowController", function ($scope, Request, UserParse, User, supersonic,Twilio) {
+  .controller("ShowController", function ($scope, Request, UserParse, User, supersonic,Twilio,RequestParse) {
     $scope.request = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
@@ -41,6 +41,28 @@ angular
     $scope.close = function (id) {
       $scope.showSpinner = true;
       $scope.request.state = "closed";
+      var lender= $scope.request.accepted_user;
+      var query = new Parse.Query(UserParse);
+      query.equalTo('objectId', lender);
+      query.find().then(function(users) {
+        supersonic.logger.info("printing before update");
+        supersonic.logger.info(users);
+        
+        
+        users[0].points=users[0].points+1;
+        users[0].save().then(function(){
+          supersonic.logger.info("saving user[0] ");
+
+        });
+        supersonic.logger.info("printing after update pts");
+        supersonic.logger.info(users[0]);
+        
+
+      },function(error) {
+        supersonic.logger.info("Error: " + error.code + " " + error.message);
+      });
+      
+
       $scope.request.save().then( function () {
         supersonic.ui.layers.pop();
       });
@@ -49,6 +71,7 @@ angular
     $scope.accept = function () {
       $scope.showSpinner = true;
       $scope.request.state = "accepted";
+      
       $scope.request.accepted_user = UserParse.current().id;
       $scope.request.accepted_name = UserParse.current().get("firstName")+' '+UserParse.current().get("lastName");
       $scope.request.save().then( function () {

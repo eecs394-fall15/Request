@@ -14,13 +14,33 @@ angular
           days=Math.floor(timeDiff / (1000*60*60*24));
 
           if(days>0){
-            showTime=days + " days ago";
+            if (days==1)
+            {
+              showTime=days + " day ago";
+            }
+            else{
+              showTime=days + " days ago";
+            }
+            
           }
           else if (hrs>0){
-            showTime=hrs+ " hrs ago";
+
+            if(hrs==1){
+              showTime=hrs+ " hr ago";
+            }
+            else{
+              showTime=hrs+ " hrs ago";
+            }
+            
           }
           else{
-            showTime=mins+ " mins ago";
+            if(mins==1){
+              showTime=mins+ " min ago";
+            }
+            else{
+              showTime=mins+ " mins ago";
+            }
+            
           }
 
           requests[i].stringCreatedAt=showTime;
@@ -50,7 +70,7 @@ angular
       query.descending("updatedAt");
       query.equalTo('state', 'open');
       query.limit(30);
-      query.notEqualTo('author_user', UserParse.current().id);
+      //query.notEqualTo('author_user', UserParse.current().id);
       return query;
     };
 
