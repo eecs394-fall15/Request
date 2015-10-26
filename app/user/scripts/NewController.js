@@ -2,6 +2,8 @@ angular
   .module('user')
  .controller("NewController", function ($scope, UserParse, supersonic) {
     $scope.user = {};
+    $scope.error = null;
+    $scope.showSpinner = false;
 
     $scope.submitForm = function () {
       $scope.showSpinner = true;
@@ -9,10 +11,16 @@ angular
         address: $scope.user.address,
         phone: $scope.user.phone,
         email: $scope.user.email,
-        request: [],
+        firstName: $scope.user.firstName,
+        lastName: $scope.user.lastName, 
         ACL: new Parse.ACL()
       }).then(function () {
+        supersonic.logger.info("SignUp Succeed");
         supersonic.ui.modal.hide();
+      }, function(error) {
+        $scope.error = error;
+        $scope.showSpinner = false;
+        supersonic.logger.info("SignUp Failed with Error: " + JSON.stringify(error));
       });
     };
 
