@@ -12,7 +12,8 @@ angular
         phone: $scope.user.phone,
         email: $scope.user.email,
         firstName: $scope.user.firstName,
-        lastName: $scope.user.lastName, 
+        lastName: $scope.user.lastName,
+        points: 0,
         ACL: new Parse.ACL()
       }).then(function () {
         supersonic.logger.info("SignUp Succeed");
