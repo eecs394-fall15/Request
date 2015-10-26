@@ -1,6 +1,6 @@
 angular
   .module('request')
-  .controller("ShowController", function ($scope, Request, UserParse, User, supersonic,Twilio) {
+  .controller("ShowController", function ($scope, Request, UserParse, User, supersonic,Twilio,RequestParse) {
     $scope.request = null;
     $scope.showSpinner = true;
     $scope.dataId = undefined;
@@ -41,6 +41,12 @@ angular
     $scope.close = function (id) {
       $scope.showSpinner = true;
       $scope.request.state = "closed";
+      Parse.Cloud.run("addPoints", {points: 1, userId: $scope.request.accepted_user}).then(function() {
+        console.log("Successed to run cloud function addScore");
+      }, function(error) {
+        console.log("Failed to run cloud function addScore with error " + JSON.stringify(err));
+      });
+
       $scope.request.save().then( function () {
         supersonic.ui.layers.pop();
       });
@@ -49,6 +55,7 @@ angular
     $scope.accept = function () {
       $scope.showSpinner = true;
       $scope.request.state = "accepted";
+
       $scope.request.accepted_user = UserParse.current().id;
       $scope.request.accepted_name = UserParse.current().get("firstName")+' '+UserParse.current().get("lastName");
       $scope.request.save().then( function () {

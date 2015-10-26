@@ -26,3 +26,21 @@ Parse.Cloud.afterSave(Parse.User, function(request) {
     request.object.save();
   }
 });
+
+//accetped param: {"points": 1, "userId": $id}
+Parse.Cloud.define("addPoints", function(request, response) {
+  console.log('In addPoints:');
+  var query = new Parse.Query(Parse.User);
+  query.equalTo('objectId', request.params.userId);
+  query.first().then(function(user) {
+    Parse.Cloud.useMasterKey();
+    user.set("points", user.get("points") + request.params.points);
+    user.save().then(function(){
+      response.success("User " + request.params.userId + " saved successfully");
+    }, function(err) {
+      response.error("Failed to save user " + request.params.userId + " with error " + JSON.stringify(err));
+    });
+  }, function(err) {
+    response.error("User query faild with error " + JSON.stringify(err));
+  });
+});

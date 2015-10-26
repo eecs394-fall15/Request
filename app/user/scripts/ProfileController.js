@@ -6,10 +6,21 @@ angular
     $scope.dataId = undefined;
 
 
-     var query = new Parse.Query(UserParse);
-     query.equalTo("objectId",UserParse.current().id);
+    
 
-     query.find().then(function(users) {
+
+    supersonic.ui.views.current.whenVisible(function() {
+      //RequestHelper.myRequests();
+      supersonic.logger.info("my profile visible");
+      $scope.refresh();
+    }); 
+
+    $scope.refresh=function(){
+
+      var query = new Parse.Query(UserParse);
+      query.equalTo("objectId",UserParse.current().id);
+
+      query.find().then(function(users) {
 
       $scope.$apply( function () {
         $scope.user = users[0];
@@ -18,6 +29,9 @@ angular
     },function(error) {
       supersonic.logger.info("Error: " + error.code + " " + error.message);
     });
+
+
+    }
 
     $scope.logout = function(){
       supersonic.logger.info("User: " + $scope.username + " logging out i think");
