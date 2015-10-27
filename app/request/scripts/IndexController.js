@@ -7,7 +7,7 @@ angular
     $scope.diffRequests = [];
     $scope.initialized = false;
     $scope.showSpinner = false;
-    $scope.action = "load";
+    $scope.action = "initial";
 
     $scope.create = function() {
       if(UserParse.current().points < 5){
@@ -42,13 +42,12 @@ angular
     };
 
     $rootScope.$on('feedrequest', function(event, requests) {
-      if (!$scope.initialized) {
+      if ($scope.action === "initial") {
         $scope.lastQuery = JSON.parse(JSON.stringify(requests));
         $scope.requests = filterOpenRequests($scope.lastQuery);
         $scope.initialized = true;
-      }
-
-      if ($scope.action === "hold") {
+        $scope.action ="hold";
+      } else if ($scope.action === "hold") {
         $scope.newQuery = requests;
         $scope.diffRequests = RequestHelper.updatedRequests($scope.lastQuery, $scope.newQuery);
       } else if ($scope.action === "load") {

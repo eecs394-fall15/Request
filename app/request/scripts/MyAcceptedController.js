@@ -2,33 +2,39 @@ angular
   .module('request')
   .controller("MyAcceptedController", function ($rootScope, $scope, $timeout, RequestHelper) {
     $scope.requests = [];
-    $scope.newRequests = [];
+    $scope.lastQuery = [];
+    $scope.newQuery = [];
     $scope.diffRequests = [];
-    $scope.initialized = false;
     $scope.showSpinner = false;
-    $scope.action = "load";
+    $scope.action = "initial";
 
-    $scope.create = function() {
-      var createView = new supersonic.ui.View("request#new");
-      supersonic.ui.modal.show(createView, {animate: true});
-    };
+    function filterAcceptedRequests(reqs) {
+      var openReqs = [];
+      for (var i = 0; i < reqs.length; i++) {
+        if (reqs[i].state === "accepted") {
+          openReqs.push(reqs[i]);
+        }
+      }
+      return openReqs;
+    }
 
     $scope.reload = function() {
-      $scope.requests = JSON.parse(JSON.stringify($scope.newRequests));
+      $scope.lastQuery = JSON.parse(JSON.stringify($scope.newQuery));
+      $scope.requests = filterAcceptedRequests($scope.lastQuery);
       $scope.diffRequests = [];
     };
 
     $rootScope.$on('acceptedrequest', function(event, requests) {
-      if (!$scope.initialized) {
-        $scope.requests = JSON.parse(JSON.stringify(requests));
-        $scope.initialized = true;
-      }
-
-      if ($scope.action === "hold") {
-        $scope.newRequests = requests;
-        $scope.diffRequests = RequestHelper.updatedRequests($scope.requests, requests);
+      if ($scope.action === "initial") {
+        $scope.lastQuery = JSON.parse(JSON.stringify(requests));
+        $scope.requests = filterAcceptedRequests($scope.lastQuery);
+        $scope.action ="hold";
+      } else if ($scope.action === "hold") {
+        $scope.newQuery = requests;
+        $scope.diffRequests = RequestHelper.updatedRequests($scope.lastQuery, $scope.newQuery);
       } else if ($scope.action === "load") {
-        $scope.requests = JSON.parse(JSON.stringify(requests));
+        $scope.lastQuery = JSON.parse(JSON.stringify(requests));
+        $scope.requests = filterAcceptedRequests($scope.lastQuery);
         $scope.diffRequests = [];
         $scope.action ="hold";
       }

@@ -75,7 +75,6 @@ angular
       var query = new Parse.Query(RequestParse);
       query.descending("updatedAt");
       query.containedIn("accepted_user", [UserParse.current().id]);
-      query.equalTo('state', 'accepted');
       return query;
     };
 
@@ -87,7 +86,7 @@ angular
       var lastUpdatedTime = Date.parse(oldReqs[0].updatedAt);
       var updatedRequests = [];
       for (var i = 0; i < newReqs.length; i++) {
-        if (newReqs[i].updatedAt > lastUpdatedTime && newReqs[i].author_user !== UserParse.current().id) {
+        if (newReqs[i].updatedAt > lastUpdatedTime) {
           updatedRequests.push(newReqs[i]);
         }
       }
