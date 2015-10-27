@@ -68,4 +68,17 @@ angular
       RequestHelper.feedRequests();
       $timeout(tick, 10000);
     })();
+
+    searchBtn = new supersonic.ui.NavigationBarButton({
+      onTap: $scope.create,
+      styleId: "nav-edit"
+    });
+
+    supersonic.ui.navigationBar.update({
+      title: "Feed",
+      overrideBackButton: false,
+      buttons: {
+        right: [searchBtn]
+      }
+    }).then(supersonic.ui.navigationBar.show())
 });

@@ -33,6 +33,10 @@ navigation-bar back-button {
   font-weight: 300;
 }
 
+#nav-edit {
+  background-image: url(icons/edit.svg);
+}
+
 /**************************************
  *  Tab Bar
  *************************************/
