@@ -10,7 +10,7 @@
     <div ng-hide="showSpinner">
       <h4>{{request.author_name}} needs to borrow.. {{request.title}}</h4>
       <p>Description: <span ng-bind="request['description']"></span></p>
-      <p>Created <span ng-bind="request['stringCreatedAt']"></span></p>
+      <p><a href="#" class="subdued">{{ request.stringCreatedAt }}</a></p>
 
       <div ng-hide="isAuthor">
         <button ng-click="accept()" ng-show="request.state==='open'" class="button icon super-heart button-block button-balanced">  Help {{request.author_name}}!
@@ -23,31 +23,33 @@
       </div>
 
       <div ng-show="isAuthor">
+        <br>
         <div ng-show="request.state==='accepted'">
           <super-navigate location="user#show?id={{request.accepted_user}}">
-            <button class="button icon super-person button-block button-balanced">
+            <button class="button icon super-person button-block button-stable">
               See {{request.accepted_name}}'s Profile
             </button>
           </super-navigate>
         </div>
+        <br></br>
         <div class="row">
 
           <div class="col">
             <super-modal-show location="request#edit?id={{ request.id }}">
-              <button class="button button-block button-positive">
+              <button class="button icon super-edit button-block button-positive">
                 Edit
                </button>
             </super-modal-show>
           </div>
 
           <div class="col">
-            <button ng-click="cancel(request.id)" class="button button-block button-negative">
+            <button ng-click="cancel(request.id)" class="button icon super-trash-a button-block button-assertive">
               Cancel
             </button>
           </div>
 
           <div class="col">
-            <button ng-click="close(request.id)" ng-show="isAccepted" class="button button-block button-negative">
+            <button ng-click="close(request.id)" ng-show="isAccepted" class="button icon super-checkmark-round button-block button-balanced">
               Done
             </button>
           </div>

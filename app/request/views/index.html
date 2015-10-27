@@ -19,20 +19,20 @@
       <div class="padding list card" ng-repeat="request in requests">
 
         <div class="item item-row">
-          <super-navigate location="user#show" data-params-id="{{ request.author_user }}">
-            <span>{{ request.author_name }}</span>
-          </super-navigate>
-
           <super-navigate location="request#show" data-params-id="{{ request.objectId }}">
             <h2>{{ request.title }}</h2>
+          </super-navigate>
+
+          <super-navigate location="user#show" data-params-id="{{ request.author_user }}">
+            <p>Requested by: {{request.author_name}}</p>
           </super-navigate>
         </div>
 
         <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.objectId }}">
           <span>{{ request.description }}</span>
-          <i class="icon super-ios-arrow-right"></i>
+          <i class="icon super-ios-arrow-right pull-right"></i>
 
-          <p><a href="#" class="subdued">{{ request.stringCreatedAt }}</a></p>
+          <p class="pull-right"><i class=super-ios-clock-outline></i> <span class="subdued">{{ request.stringCreatedAt }}<span></p>
         </super-navigate>
 
       </div>
