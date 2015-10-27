@@ -32,43 +32,67 @@ angular
     });
 
     $scope.remove = function (id) {
-      $scope.showSpinner = true;
-      $scope.request.delete().then( function () {
-        supersonic.ui.layers.pop();
+      var options = {
+        message: "Are you sure you want to cancel the request?",
+        buttonLabels: ["Yes", "No"]
+      };
+
+      supersonic.ui.dialog.confirm("Cancel Request", options).then(function(index) {
+        if (index === 0) {
+          $scope.showSpinner = true;
+          $scope.request.delete().then(function () {
+            supersonic.ui.layers.pop();
+          });
+        } else {
+          supersonic.logger.log("Request Cancelling Aborted");
+        }
       });
     };
 
     $scope.close = function (id) {
-      $scope.showSpinner = true;
-      $scope.request.state = "closed";
-      Parse.Cloud.run("addPoints", {points: 1, userId: $scope.request.accepted_user}).then(function() {
-        console.log("Successed to run cloud function addScore");
-      }, function(error) {
-        console.log("Failed to run cloud function addScore with error " + JSON.stringify(err));
-      });
+      var options = {
+        message: "Are you sure you want to close the request?",
+        buttonLabels: ["Yes", "No"]
+      };
 
-      $scope.request.save().then( function () {
-        supersonic.ui.layers.pop();
+      supersonic.ui.dialog.confirm("Close Request", options).then(function(index) {
+        if (index === 0) {
+          $scope.showSpinner = true;
+          $scope.request.state = "closed";
+          Parse.Cloud.run("addPoints", {points: 1, userId: $scope.request.accepted_user}).then(function() {
+            supersonic.logger.log("Successed to run cloud function addScore");
+          }, function(error) {
+            supersonic.logger.log("Failed to run cloud function addScore with error " + JSON.stringify(err));
+          });
+
+          $scope.request.save().then( function () {
+            supersonic.ui.layers.pop();
+          });
+        } else {
+          supersonic.logger.log("Request Closing Aborted");
+        }
       });
     };
 
     $scope.accept = function () {
-      $scope.showSpinner = true;
-      $scope.request.state = "accepted";
-
-      $scope.request.accepted_user = UserParse.current().id;
-      $scope.request.accepted_name = UserParse.current().get("firstName")+' '+UserParse.current().get("lastName");
-      $scope.request.save().then( function () {
-        supersonic.ui.layers.pop();
-      });
-
       var options = {
-        message: "You just accepted a request!",
-        buttonLabel: "Close"
+        message: "Are you sure you want to accept the request?",
+        buttonLabels: ["Yes", "No"]
       };
 
-      supersonic.ui.dialog.alert("Accepted Request", options).then(function() {
-        supersonic.logger.log("Alert closed.");
+      supersonic.ui.dialog.confirm("Accept Request", options).then(function(index) {
+        if (index === 0) {
+          $scope.showSpinner = true;
+          $scope.request.state = "accepted";
+
+          $scope.request.accepted_user = UserParse.current().id;
+          $scope.request.accepted_name = UserParse.current().get("firstName")+' '+UserParse.current().get("lastName");
+          $scope.request.save().then( function () {
+            supersonic.ui.layers.pop();
+          });
+        } else {
+          supersonic.logger.log("Request Accepted Aborted");
+        }
       });
     };
   });
