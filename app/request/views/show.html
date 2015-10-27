@@ -13,7 +13,7 @@
       <p>Created <span ng-bind="request['stringCreatedAt']"></span></p>
 
       <div ng-hide="isAuthor">
-        <button ng-click="accept()" class="button icon super-heart button-block button-balanced">  Help {{request.author_name}}!
+        <button ng-click="accept()" ng-show="request.state === 'open'" class="button icon super-heart button-block button-balanced">  Help {{request.author_name}}!
         </button>
         <super-navigate location="user#show" data-params-id="{{request.author_user}}">
           <button  class="button icon super-person button-block button-positive">
