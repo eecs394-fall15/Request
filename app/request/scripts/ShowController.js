@@ -31,7 +31,7 @@ angular
       _refreshViewData();
     });
 
-    $scope.remove = function (id) {
+    $scope.cancel = function (id) {
       var options = {
         message: "Are you sure you want to cancel the request?",
         buttonLabels: ["Yes", "No"]
@@ -40,7 +40,9 @@ angular
       supersonic.ui.dialog.confirm("Cancel Request", options).then(function(index) {
         if (index === 0) {
           $scope.showSpinner = true;
-          $scope.request.delete().then(function () {
+          $scope.request.state = "cancelled";
+
+          $scope.request.save().then( function () {
             supersonic.ui.layers.pop();
           });
         } else {

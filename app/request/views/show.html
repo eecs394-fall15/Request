@@ -13,7 +13,7 @@
       <p>Created <span ng-bind="request['stringCreatedAt']"></span></p>
 
       <div ng-hide="isAuthor">
-        <button ng-click="accept()" ng-show="request.state === 'open'" class="button icon super-heart button-block button-balanced">  Help {{request.author_name}}!
+        <button ng-click="accept()" ng-show="request.state==='open'" class="button icon super-heart button-block button-balanced">  Help {{request.author_name}}!
         </button>
         <super-navigate location="user#show" data-params-id="{{request.author_user}}">
           <button  class="button icon super-person button-block button-positive">
@@ -41,7 +41,7 @@
           </div>
 
           <div class="col">
-            <button ng-click="remove(request.id)" class="button button-block button-negative">
+            <button ng-click="cancel(request.id)" class="button button-block button-negative">
               Cancel
             </button>
           </div>
