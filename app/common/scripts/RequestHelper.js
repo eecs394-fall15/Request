@@ -63,7 +63,6 @@ angular
       var query = new Parse.Query(RequestParse);
       supersonic.logger.info("After Initiating Query.");
       query.descending("updatedAt");
-      query.equalTo('state', 'open');
       query.limit(30);
       return query;
     };
@@ -88,7 +87,7 @@ angular
       var lastUpdatedTime = Date.parse(oldReqs[0].updatedAt);
       var updatedRequests = [];
       for (var i = 0; i < newReqs.length; i++) {
-        if (newReqs[i].updatedAt > lastUpdatedTime) {
+        if (newReqs[i].updatedAt > lastUpdatedTime && newReqs[i].author_user !== UserParse.current().id) {
           updatedRequests.push(newReqs[i]);
         }
       }
