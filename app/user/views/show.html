@@ -8,6 +8,7 @@
   <div class="padding list card">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
+      <img ng-src="{{user.picture}}" class="profile-picture"></img>
       <h2 class="text-centered">{{user.firstName}} {{user.lastName}}</h2>
         <div class="padding item row">
           <div class="col">
