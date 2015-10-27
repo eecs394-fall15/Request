@@ -2,11 +2,12 @@ angular
   .module('request')
   .controller("IndexController", function ($rootScope, $scope, $timeout, RequestHelper,UserParse) {
     $scope.requests = [];
-    $scope.newRequests = [];
+    $scope.lastQuery = [];
+    $scope.newQuery = [];
     $scope.diffRequests = [];
     $scope.initialized = false;
     $scope.showSpinner = false;
-    $scope.action = "load";
+    $scope.action = "initial";
 
     $scope.create = function() {
       if(UserParse.current().points < 5){
@@ -24,22 +25,34 @@ angular
       }
     };
 
+    function filterOpenRequests(reqs) {
+      var openReqs = [];
+      for (var i = 0; i < reqs.length; i++) {
+        if (reqs[i].state === "open") {
+          openReqs.push(reqs[i]);
+        }
+      }
+      return openReqs;
+    }
+
     $scope.reload = function() {
-      $scope.requests = JSON.parse(JSON.stringify($scope.newRequests));
+      $scope.lastQuery = JSON.parse(JSON.stringify($scope.newQuery));
+      $scope.requests = filterOpenRequests($scope.lastQuery);
       $scope.diffRequests = [];
     };
 
     $rootScope.$on('feedrequest', function(event, requests) {
-      if (!$scope.initialized) {
-        $scope.requests = JSON.parse(JSON.stringify(requests));
+      if ($scope.action === "initial") {
+        $scope.lastQuery = JSON.parse(JSON.stringify(requests));
+        $scope.requests = filterOpenRequests($scope.lastQuery);
         $scope.initialized = true;
-      }
-
-      if ($scope.action === "hold") {
-        $scope.newRequests = requests;
-        $scope.diffRequests = RequestHelper.updatedRequests($scope.requests, $scope.newRequests);
+        $scope.action ="hold";
+      } else if ($scope.action === "hold") {
+        $scope.newQuery = requests;
+        $scope.diffRequests = RequestHelper.updatedRequests($scope.lastQuery, $scope.newQuery);
       } else if ($scope.action === "load") {
-        $scope.requests = JSON.parse(JSON.stringify(requests));
+        $scope.lastQuery = JSON.parse(JSON.stringify(requests));
+        $scope.requests = filterOpenRequests($scope.lastQuery);
         $scope.diffRequests = [];
         $scope.action ="hold";
       }
@@ -47,7 +60,7 @@ angular
 
     supersonic.ui.views.current.whenVisible(function() {
       $scope.diffRequests = [];
-      $scope.action ="load";
+      $scope.action = "load";
       RequestHelper.feedRequests();
     });
 

@@ -63,7 +63,6 @@ angular
       var query = new Parse.Query(RequestParse);
       supersonic.logger.info("After Initiating Query.");
       query.descending("updatedAt");
-      query.equalTo('state', 'open');
       query.limit(30);
       return query;
     };
@@ -76,7 +75,6 @@ angular
       var query = new Parse.Query(RequestParse);
       query.descending("updatedAt");
       query.containedIn("accepted_user", [UserParse.current().id]);
-      query.equalTo('state', 'accepted');
       return query;
     };
 
