@@ -39,4 +39,25 @@ angular
       supersonic.logger.info("User: " + UserParse.current() + " should be null ");
     };
 
+    $scope.upload = function() {
+      console.log("Hey, this works!");
+      options = {
+        destinationType: "dataURL",
+        quality: 50,
+        allowEdit: true,
+        targetWidth: 150,
+        targetHeight: 150
+      };
+      supersonic.media.camera.getFromPhotoLibrary(options).then( function(result) {
+        console.log("Uploading...");
+        console.log("Unmodified data: " + result);
+        var fileData = "data:image/png;base64," + result;
+        console.log("Data: " + fileData);
+        $scope.user.picture = fileData;
+        $scope.user.save().then( function () {
+          console.log("Upload successful!");
+        });
+      });
+    };
+
   });
