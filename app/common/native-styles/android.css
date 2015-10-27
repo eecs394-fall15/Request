@@ -65,7 +65,7 @@ tab-bar tab-bar-item marker-top:selected {
 }
 
 tab-bar-item#profile {
-  /* background-image: url(icons/icons.png); */
+  background-image: url(icons/person.svg);
 }
 
 tab-bar-item#accepted {
