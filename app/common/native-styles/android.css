@@ -4,7 +4,7 @@
  ***********************************************************/
 
 navigation-bar {
-  background-color: #00B5FF;
+  background-color: #ffb347;
   color: #ffffff;
   padding-left: 6px;
   padding-right: 6px;
@@ -74,4 +74,3 @@ tab-bar-item#requested {
 tab-bar-item#feed {
   /* background-image: url(icons/home.svg); */
 }
-

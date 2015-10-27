@@ -1,25 +1,31 @@
-<div class="col-md-6 col-md-offset-3" ng-controller="LoginController">
-    <h2 class="text-centered">Request</h2>
+<div class="login padding list card" ng-controller="LoginController">
+  <br>
+    <h1 class="text-centered app-title">Request</h1>
+    <img class="logo" ng-src="https://res.cloudinary.com/duizpqaab/image/upload/q_100/v1445931197/requestlogo_ruenxx.png"></img>
     <br></br>
     <div ng-show="error" class="alert alert-danger">{{ error }}</div>
     <form name="form" ng-submit="login()" role="form">
-        <div class="list">
+        <div class="login list list-inset">
           <div ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-            <label for="username" class="item item-input item-stacked-label">
-              <span class="input-label">Username</span>
-              <input type="text" name="username" id="username" ng-model="username" required />
-              <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+            <label for="username" class="item item-input">
+              <i class="icon super-person placeholder-icon"></i>
+              <input type="text" name="username" id="username" ng-model="username" placeholder="Username" required />
             </label>
           </div>
+          <div ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</div>
+          <br>
           <div ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-            <label for="password" class="item item-input item-stacked-label">
-              <span class="input-label">Password</span>
-              <input type="password" name="password" id="password" ng-model="password" required />
-              <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+            <label for="password" class="item item-input">
+              <i class="icon super-locked placeholder-icon"></i>
+              <input type="password" name="password" id="password" ng-model="password" placeholder="Password" required />
             </label>
           </div>
-              <button type="submit" ng-disabled="form.$invalid || dataLoading" class="button button-block button-positive">Login</button>
-              <super-modal-show location="user#new" class="button button-block button-stable">Register</super-modal-show>
+          <div ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</div>
+
+          <br></br>
+
+          <button type="submit" ng-disabled="form.$invalid || dataLoading" class="item button button-block button-positive">Login</button>
+          <super-modal-show location="user#new" class="button button-block button-stable">Register</super-modal-show>
         </div>
     </form>
 </div>
