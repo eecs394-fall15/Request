@@ -20,7 +20,7 @@ navigation-bar button, navigation-bar back-bar-button {
 }
 
 #nav-edit icon {
-  background-image: url(icons/edit.svg);
+  background-image: url(icons/ios-compose-outline.svg);
 }
 
 tab-bar {
@@ -39,16 +39,16 @@ tab-bar tab-bar-item:selected {
 }
 
 tab-bar-item#profile {
-  background-image: url(icons/ios-person.svg);
+  background-image: url(icons/ios-person-outline.svg);
 }
 
 tab-bar-item#accepted {
-
+  background-image: url(icons/ios-cloud-download-outline.svg);
 }
 
 tab-bar-item#requested {
-
+  background-image: url(icons/ios-paperplane-outline.svg);
 }
 tab-bar-item#feed {
-
+  background-image: url(icons/ios-list-outline.svg);
 }
