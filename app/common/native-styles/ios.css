@@ -31,8 +31,16 @@ navigation-bar button, navigation-bar back-bar-button {
   background-image: url(icons/ios-trash-outline.svg);
 }
 
-#nav-save icon {
+#nav-send icon {
   background-image: url(icons/ios-paperplane-outline.svg);
+}
+
+#nav-cancel icon {
+  background-image: url(icons/ios-close-outline.svg);
+}
+
+#nav-save icon {
+  background-image: url(icons/ios-checkmark-outline.svg);
 }
 
 tab-bar {

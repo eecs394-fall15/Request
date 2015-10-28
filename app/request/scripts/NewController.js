@@ -31,7 +31,7 @@ angular
 
     saveBtn = new supersonic.ui.NavigationBarButton({
       onTap: $scope.submitForm,
-      styleId: "nav-save"
+      styleId: "nav-send"
     });
 
     supersonic.ui.navigationBar.update({

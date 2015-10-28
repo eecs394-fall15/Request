@@ -43,7 +43,6 @@ angular
       supersonic.app.openURL("http://maps.google.com/maps?daddr="+address);
     };
 
-
     $scope.remove = function (id) {
       $scope.showSpinner = true;
       $scope.user.delete().then( function () {
