@@ -35,8 +35,29 @@ navigation-bar back-button {
   font-weight: 300;
 }
 
-#nav-edit {
-  background-image: url(icons/edit.svg);
+
+#nav-edit  {
+  background-image: url(icons/ios-compose-outline.svg);
+}
+
+#nav-new  {
+  background-image: url(icons/ios-plus-outline.svg);
+}
+
+#nav-discard  {
+  background-image: url(icons/ios-trash-outline.svg);
+}
+
+#nav-send  {
+  background-image: url(icons/ios-paperplane-outline.svg);
+}
+
+#nav-cancel  {
+  background-image: url(icons/ios-close-outline.svg);
+}
+
+#nav-save {
+  background-image: url(icons/ios-checkmark-outline.svg);
 }
 
 /**************************************
