@@ -65,16 +65,16 @@ tab-bar tab-bar-item marker-top:selected {
 }
 
 tab-bar-item#profile {
-  background-image: url(icons/person.svg);
+  background-image: url(icons/ios-person-outline.svg);
 }
 
 tab-bar-item#accepted {
-  /* background-image: url(icons/home.svg); */
+  background-image: url(icons/ios-cloud-download-outline.svg);
 }
 
 tab-bar-item#requested {
-  /* background-image: url(icons/home.svg); */
+  background-image: url(icons/ios-cloud-upload-outline.svg);
 }
 tab-bar-item#feed {
-  /* background-image: url(icons/home.svg); */
+  background-image: url(icons/ios-list-outline.svg);
 }
