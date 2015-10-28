@@ -11,6 +11,7 @@
       <h4>{{request.author_name}} needs to borrow.. {{request.title}}</h4>
       <p>Description: <span ng-bind="request['description']"></span></p>
       <p>Created <span ng-bind="request['stringCreatedAt']"></span></p>
+      <p>{{ request.stringCreatedAt }}</p>
 
       <div ng-hide="isAuthor">
         <button ng-click="accept()" ng-show="request.state === 'open'" class="button icon super-heart button-block button-balanced">  Help {{request.author_name}}!
