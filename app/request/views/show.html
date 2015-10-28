@@ -1,59 +1,37 @@
 <div ng-controller="ShowController">
-  <super-navbar>
-    <super-navbar-title>
-      Details
-    </super-navbar-title>
-  </super-navbar>
-
   <div class="padding list card">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
-      <h4>{{request.author_name}} needs to borrow.. {{request.title}}</h4>
-      <p>Description: <span ng-bind="request['description']"></span></p>
-      <p><a href="#" class="subdued">{{ request.stringCreatedAt }}</a></p>
+      <h2 class="text-centered">{{request.title}}</h2>
+      <div class="padding card">
+        <super-navigate class="item item-row" location="user#show" data-params-id="{{ request.author_user }}">
+          <p>Author: {{request.author_name}}</p>
+        </super-navigate>
+        <super-navigate class="item item-row" ng-show="isAccepted" class="item item-row" location="user#show" data-params-id="{{ request.accepted_user }}">
+          <p>Accepted By: {{request.accepted_name}}</p>
+        </super-navigate>
+        <div class="item item-row">
+          <p>Created At: {{request.stringCreatedAt}}</p>
+        </div>
+        <div class="item item-body">
+          <p>Description: {{request.description}}</p>
+        </div>
+      </div>
 
       <div ng-hide="isAuthor">
-        <button ng-click="accept()" ng-show="request.state==='open'" class="button icon super-heart button-block button-balanced">  Help {{request.author_name}}!
+        <button ng-click="accept()" ng-show="request.state==='open'" class="button icon super-heart button-block button-balanced">
+          Help
         </button>
-        <super-navigate location="user#show" data-params-id="{{request.author_user}}">
-          <button  class="button icon super-person button-block button-positive">
-            See {{request.author_name}}'s profile
-          </button>
-        </super-navigate>
       </div>
 
       <div ng-show="isAuthor">
-        <br>
-        <div ng-show="request.state==='accepted'">
-          <super-navigate location="user#show?id={{request.accepted_user}}">
-            <button class="button icon super-person button-block button-stable">
-              See {{request.accepted_name}}'s Profile
-            </button>
-          </super-navigate>
-        </div>
-        <br></br>
-        <div class="row">
+        <button ng-click="cancel(request.id)" ng-show="isOpen" class="button icon super-trash-a button-block button-balanced">
+          Cancel
+        </button>
 
-          <div class="col">
-            <super-modal-show location="request#edit?id={{ request.id }}">
-              <button class="button icon super-edit button-block button-positive">
-                Edit
-               </button>
-            </super-modal-show>
-          </div>
-
-          <div class="col">
-            <button ng-click="cancel(request.id)" class="button icon super-trash-a button-block button-assertive">
-              Cancel
-            </button>
-          </div>
-
-          <div class="col">
-            <button ng-click="close(request.id)" ng-show="isAccepted" class="button icon super-checkmark-round button-block button-balanced">
-              Done
-            </button>
-          </div>
-        </div>
+        <button ng-click="close(request.id)" ng-show="isAccepted" class="button icon super-checkmark-round button-block button-balanced">
+          Done
+        </button>
       </div>
     </div>
   </div>

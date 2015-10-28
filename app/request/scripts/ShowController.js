@@ -6,6 +6,12 @@ angular
     $scope.dataId = undefined;
     $scope.isAuthor = null;
     $scope.isAccepted = null;
+    $scope.isOpen = null;
+
+    $scope.edit = function(){
+      var editView = new supersonic.ui.View("request#edit?id=" + $scope.request.id);
+      supersonic.ui.modal.show(editView, {animate: true});
+    }
 
     var _refreshViewData = function () {
       Request.find($scope.dataId).then( function (request) {
@@ -13,8 +19,29 @@ angular
           $scope.request = request;
           $scope.isAuthor = (UserParse.current().id === request.author_user);
           $scope.isAccepted = request.state === 'accepted';
+          $scope.isOpen = request.state === 'open';
           $scope.showSpinner = false;
         });
+
+        if ($scope.isAuthor) {
+          editBtn = new supersonic.ui.NavigationBarButton({
+            onTap: $scope.edit,
+            styleId: "nav-edit"
+          });
+
+          supersonic.ui.navigationBar.update({
+            title: "Request Details",
+            overrideBackButton: false,
+            buttons: {
+              right: [editBtn]
+            }
+          }).then(supersonic.ui.navigationBar.show());
+        } else {
+          supersonic.ui.navigationBar.update({
+          title: "Request Details",
+          overrideBackButton: false,
+          }).then(supersonic.ui.navigationBar.show());
+        }
       });
     };
 
@@ -97,4 +124,5 @@ angular
         }
       });
     };
-  });
+
+    });
