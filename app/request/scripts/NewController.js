@@ -24,9 +24,9 @@ angular
       supersonic.ui.modal.hide();
     };
 
-    cancelBtn = new supersonic.ui.NavigationBarButton({
+    discardBtn = new supersonic.ui.NavigationBarButton({
       onTap: $scope.cancel,
-      styleId: "nav-cancel"
+      styleId: "nav-discard"
     });
 
     saveBtn = new supersonic.ui.NavigationBarButton({
@@ -38,7 +38,7 @@ angular
       title: "New Request",
       overrideBackButton: false,
       buttons: {
-        left: [cancelBtn],
+        left: [discardBtn],
         right: [saveBtn]
       }
     }).then(supersonic.ui.navigationBar.show());

@@ -1,10 +1,4 @@
 <div ng-controller="ProfileController">
-  <super-navbar>
-    <super-navbar-title>
-      My Profile
-    </super-navbar-title>
-  </super-navbar>
-
   <div class="padding list card">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
@@ -22,12 +16,6 @@
        <div class="item item-row">
         <p>Points: {{user.points}}</p>
       </div>
-
-      <super-modal-show location="user#edit?id={{ user.id }}">
-        <button class="button button-block button-positive">
-          Edit Profile
-        </button>
-      </super-modal-show>
 
       <super-modal-show location="request#login">
       <button ng-click="logout()" class="button button-block button-negative">

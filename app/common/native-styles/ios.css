@@ -23,7 +23,11 @@ navigation-bar button, navigation-bar back-bar-button {
   background-image: url(icons/ios-compose-outline.svg);
 }
 
-#nav-cancel icon {
+#nav-new icon {
+  background-image: url(icons/ios-plus-outline.svg);
+}
+
+#nav-discard icon {
   background-image: url(icons/ios-trash-outline.svg);
 }
 

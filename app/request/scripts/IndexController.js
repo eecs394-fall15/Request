@@ -69,16 +69,16 @@ angular
       $timeout(tick, 10000);
     })();
 
-    searchBtn = new supersonic.ui.NavigationBarButton({
+    newBtn = new supersonic.ui.NavigationBarButton({
       onTap: $scope.create,
-      styleId: "nav-edit"
+      styleId: "nav-new"
     });
 
     supersonic.ui.navigationBar.update({
       title: "Feed",
       overrideBackButton: false,
       buttons: {
-        right: [searchBtn]
+        right: [newBtn]
       }
     }).then(supersonic.ui.navigationBar.show());
 });
