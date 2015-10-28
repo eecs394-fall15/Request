@@ -14,7 +14,7 @@ angular
         firstName: $scope.user.firstName,
         lastName: $scope.user.lastName,
         points: 0,
-        picture: 'https://docs.moodle.org/28/en/images_en/7/7c/F1.png'
+        picture: 'https://docs.moodle.org/28/en/images_en/7/7c/F1.png',
         ACL: new Parse.ACL()
       }).then(function () {
         supersonic.logger.info("SignUp Succeed");
