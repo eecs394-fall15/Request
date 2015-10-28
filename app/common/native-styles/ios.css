@@ -4,7 +4,7 @@
  ***********************************************************/
 
 navigation-bar {
-  background-color: #00B5FF;
+  background-color: #ffb347;
   color: #ffffff;
 }
 
@@ -17,6 +17,30 @@ navigation-bar title {
 navigation-bar button, navigation-bar back-bar-button {
   color: #ffffff;
   font-weight: 300;
+}
+
+#nav-edit icon {
+  background-image: url(icons/ios-compose-outline.svg);
+}
+
+#nav-new icon {
+  background-image: url(icons/ios-plus-outline.svg);
+}
+
+#nav-discard icon {
+  background-image: url(icons/ios-trash-outline.svg);
+}
+
+#nav-send icon {
+  background-image: url(icons/ios-paperplane-outline.svg);
+}
+
+#nav-cancel icon {
+  background-image: url(icons/ios-close-outline.svg);
+}
+
+#nav-save icon {
+  background-image: url(icons/ios-checkmark-outline.svg);
 }
 
 tab-bar {
@@ -35,16 +59,16 @@ tab-bar tab-bar-item:selected {
 }
 
 tab-bar-item#profile {
-  
+  background-image: url(icons/ios-person-outline.svg);
 }
 
 tab-bar-item#accepted {
-  
+  background-image: url(icons/ios-cloud-download-outline.svg);
 }
 
 tab-bar-item#requested {
-  
+  background-image: url(icons/ios-cloud-upload-outline.svg);
 }
 tab-bar-item#feed {
-  
+  background-image: url(icons/ios-list-outline.svg);
 }

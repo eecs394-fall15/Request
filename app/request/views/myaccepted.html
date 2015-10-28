@@ -3,25 +3,31 @@
     <super-navbar-title>
       Accepted
     </super-navbar-title>
-    
+
   </super-navbar>
 
   <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
   <div ng-hide="showSpinner">
     <div class="padding">
       <button class="button icon button-block button-balanced" ng-hide="diffRequests.length===0" ng-click="reload()">
-        {{ diffRequests.length }} new updates
+        {{ diffRequests.length }} new updates, click to load
       </button>
       <div class="list card" ng-repeat="request in requests">
-        <div class="item">
-          <super-navigate class="title" location="request#show" data-params-id="{{ request.objectId }}">
-            <h3>{{ request.title }}</h3>
-            <p>Requested by: {{request.author_name}}</p>
+        <div class="item item-row">
+          <super-navigate location="request#show" data-params-id="{{ request.objectId }}">
+            <h2>{{ request.title }}</h2>
+          </super-navigate>
+
+          <super-navigate class="pull-right" location="user#show" data-params-id="{{ request.author_user }}">
+            <p>By: {{request.author_name}}</p>
           </super-navigate>
         </div>
+
         <super-navigate class="item item-body" location="request#show" data-params-id="{{ request.objectId }}">
-          <p>{{ request.description }}</p>
-          <p><a href="#" class="subdued">{{ request.stringCreatedAt }}</a></p>
+          <span>{{ request.description }}</span>
+          <i class="icon super-ios-arrow-right pull-right"></i>
+          <br>
+          <p><i class=super-ios-clock-outline></i> <span class="subdued">{{ request.stringCreatedAt }}</span></p>
         </super-navigate>
 
       </div>

@@ -23,4 +23,23 @@ angular
       supersonic.ui.modal.hide();
     }
 
+    cancelBtn = new supersonic.ui.NavigationBarButton({
+      onTap: $scope.cancel,
+      styleId: "nav-cancel"
+    });
+
+    saveBtn = new supersonic.ui.NavigationBarButton({
+      onTap: $scope.submitForm,
+      styleId: "nav-save"
+    });
+
+    supersonic.ui.navigationBar.update({
+      title: "Edit Request",
+      overrideBackButton: false,
+      buttons: {
+        left: [cancelBtn],
+        right: [saveBtn]
+      }
+    }).then(supersonic.ui.navigationBar.show());
+
   });

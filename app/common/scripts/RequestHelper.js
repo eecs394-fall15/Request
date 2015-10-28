@@ -21,7 +21,6 @@ angular
             else{
               showTime=days + " days ago";
             }
-            
           }
           else if (hrs>0){
 
@@ -31,7 +30,6 @@ angular
             else{
               showTime=hrs+ " hrs ago";
             }
-            
           }
           else{
             if(mins==1){
@@ -40,12 +38,9 @@ angular
             else{
               showTime=mins+ " mins ago";
             }
-            
           }
-
           requests[i].stringCreatedAt=showTime;
         }
-
         $rootScope.$broadcast(eventName, requests);
       },function(error) {
         supersonic.logger.info("Error: " + error.code + " " + error.message);
@@ -55,7 +50,7 @@ angular
     requestHelper.myRequestsQuery = function() {
       var query = new Parse.Query(RequestParse);
       query.descending("updatedAt");
-      query.notEqualTo('state', 'closed');
+      query.containedIn('state', ['open', 'accepted']);
       query.containedIn("author_user", [UserParse.current().id]);
       return query;
     };
@@ -68,9 +63,7 @@ angular
       var query = new Parse.Query(RequestParse);
       supersonic.logger.info("After Initiating Query.");
       query.descending("updatedAt");
-      query.equalTo('state', 'open');
       query.limit(30);
-      //query.notEqualTo('author_user', UserParse.current().id);
       return query;
     };
 
@@ -82,7 +75,6 @@ angular
       var query = new Parse.Query(RequestParse);
       query.descending("updatedAt");
       query.containedIn("accepted_user", [UserParse.current().id]);
-      query.equalTo('state', 'accepted');
       return query;
     };
 

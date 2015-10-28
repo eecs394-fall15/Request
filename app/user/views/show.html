@@ -1,16 +1,10 @@
 <div ng-controller="ShowController">
-  <super-navbar>
-    <super-navbar-title>
-      User Profile
-    </super-navbar-title>
-  </super-navbar>
-
   <div class="padding list card">
     <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
     <div ng-hide="showSpinner">
       <img ng-src="{{user.picture}}" class="profile-picture"></img>
       <h2 class="text-centered">{{user.firstName}} {{user.lastName}}</h2>
-        <div class="padding item row">
+        <div class="padding item row" ng-hide="isAuthor">
           <div class="col">
             <button class="button icon super-email button-circle" ng-click="email()"></button>
           </div>
@@ -21,7 +15,7 @@
             <button class="button icon super-chatbox-working button-circle" ng-click="text()"></button>
           </div>
           <div class="col">
-            <button class="button icon super-home button-circle" ng-click="map()"></button>
+            <button class="button icon super-map button-circle" ng-click="map()"></button>
           </div>
         </div>
       <div class="item item-row">

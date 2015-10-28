@@ -6,6 +6,7 @@ angular
     $scope.diffRequests = [];
     $scope.initialized = false;
     $scope.showSpinner = false;
+    $scope.action = "load";
 
     $scope.create = function() {
       var createView = new supersonic.ui.View("request#new");
@@ -22,13 +23,21 @@ angular
         $scope.requests = JSON.parse(JSON.stringify(requests));
         $scope.initialized = true;
       }
-      $scope.newRequests = requests;
-      $scope.diffRequests = RequestHelper.updatedRequests($scope.requests, requests);
+
+      if ($scope.action === "hold") {
+        $scope.newRequests = requests;
+        $scope.diffRequests = RequestHelper.updatedRequests($scope.requests, requests);
+      } else if ($scope.action === "load") {
+        $scope.requests = JSON.parse(JSON.stringify(requests));
+        $scope.diffRequests = [];
+        $scope.action ="hold";
+      }
     });
 
     supersonic.ui.views.current.whenVisible(function() {
+      $scope.diffRequests = [];
+      $scope.action ="load";
       RequestHelper.myRequests();
-      $scope.reload();
     });
 
     (function tick() {

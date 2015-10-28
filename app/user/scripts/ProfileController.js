@@ -5,32 +5,28 @@ angular
     $scope.showSpinner = true;
     $scope.dataId = undefined;
 
-
-    
-
-
     supersonic.ui.views.current.whenVisible(function() {
-      //RequestHelper.myRequests();
       supersonic.logger.info("my profile visible");
       $scope.refresh();
-    }); 
+    });
 
-    $scope.refresh=function(){
+    $scope.edit = function(){
+      var editView = new supersonic.ui.View("user#edit?id=" + $scope.user.id);
+      supersonic.ui.modal.show(editView, {animate: true});
+    }
 
+    $scope.refresh = function(){
       var query = new Parse.Query(UserParse);
       query.equalTo("objectId",UserParse.current().id);
 
       query.find().then(function(users) {
-
-      $scope.$apply( function () {
-        $scope.user = users[0];
-        $scope.showSpinner = false;
+        $scope.$apply( function () {
+          $scope.user = users[0];
+          $scope.showSpinner = false;
+        });
+       },function(error) {
+        supersonic.logger.info("Error: " + error.code + " " + error.message);
       });
-    },function(error) {
-      supersonic.logger.info("Error: " + error.code + " " + error.message);
-    });
-
-
     }
 
     $scope.logout = function(){
@@ -48,6 +44,7 @@ angular
         targetWidth: 150,
         targetHeight: 150
       };
+
       supersonic.media.camera.getFromPhotoLibrary(options).then( function(result) {
         console.log("Uploading...");
         console.log("Unmodified data: " + result);
@@ -60,4 +57,16 @@ angular
       });
     };
 
+    editBtn = new supersonic.ui.NavigationBarButton({
+      onTap: $scope.edit,
+      styleId: "nav-edit"
+    });
+
+    supersonic.ui.navigationBar.update({
+      title: "My Profile",
+      overrideBackButton: false,
+      buttons: {
+        right: [editBtn]
+      }
+    }).then(supersonic.ui.navigationBar.show());
   });

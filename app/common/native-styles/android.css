@@ -4,7 +4,7 @@
  ***********************************************************/
 
 navigation-bar {
-  background-color: #00B5FF;
+  background-color: #ffb347;
   color: #ffffff;
   padding-left: 6px;
   padding-right: 6px;
@@ -31,6 +31,10 @@ navigation-bar back-indicator {
 navigation-bar back-button {
   color: #ffffff;
   font-weight: 300;
+}
+
+#nav-edit {
+  background-image: url(icons/edit.svg);
 }
 
 /**************************************
@@ -61,7 +65,7 @@ tab-bar tab-bar-item marker-top:selected {
 }
 
 tab-bar-item#profile {
-  /* background-image: url(icons/icons.png); */
+  background-image: url(icons/person.svg);
 }
 
 tab-bar-item#accepted {
@@ -74,4 +78,3 @@ tab-bar-item#requested {
 tab-bar-item#feed {
   /* background-image: url(icons/home.svg); */
 }
-
