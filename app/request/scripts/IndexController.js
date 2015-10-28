@@ -80,5 +80,5 @@ angular
       buttons: {
         right: [searchBtn]
       }
-    }).then(supersonic.ui.navigationBar.show())
+    }).then(supersonic.ui.navigationBar.show());
 });
