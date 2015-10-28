@@ -8,12 +8,14 @@ navigation-bar {
   color: #ffffff;
   padding-left: 6px;
   padding-right: 6px;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 navigation-bar title {
   color: #ffffff;
   font-size: 18px;
   font-weight: 600;
+  font-family: 'Josefin Sans', sans-serif !important;
 }
 
 navigation-bar button {
@@ -44,6 +46,7 @@ navigation-bar back-button {
 tab-bar {
   background-color: #ffffff;
   border-top: 1px #d8d8d8 solid;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 tab-bar tab-bar-item {
