@@ -12,9 +12,11 @@ angular
 
       newrequest.author_name = UserParse.current().get('firstName') + ' ' + UserParse.current().get('lastName');
 
+
      
       var d=new Date();
       newrequest.stringCreatedAt = (d.toString()).substring(0,10);
+
 
 
 
@@ -23,6 +25,7 @@ angular
         UserParse.current().save();
         supersonic.ui.modal.hide();
       });
+
       UserParse.current().points=UserParse.current().points-1;
     };
 
