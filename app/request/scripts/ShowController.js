@@ -7,6 +7,7 @@ angular
     $scope.isAuthor = null;
     $scope.isAccepted = null;
     $scope.isOpen = null;
+    $scope.timed=null;
 
     $scope.edit = function(){
       var editView = new supersonic.ui.View("request#edit?id=" + $scope.request.id);
@@ -21,6 +22,11 @@ angular
           $scope.isAccepted = request.state === 'accepted';
           $scope.isOpen = request.state === 'open';
           $scope.showSpinner = false;
+
+
+         
+
+
         });
 
         if ($scope.isAuthor) {

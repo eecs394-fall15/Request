@@ -12,8 +12,9 @@ angular
 
       newrequest.author_name = UserParse.current().get('firstName') + ' ' + UserParse.current().get('lastName');
 
-      newrequest.stringCreatedAt = (""+UserParse.current().get('createdAt')).substring(0,10);
-      // newrequest.stringCreatedAt = (""+UserParse.current().get('createdAt').getMonth()+"-"+ UserParse.current().get('createdAt').getDate()+"-"+UserParse.current().get('createdAt').getYear());
+     
+      var d=new Date();
+      newrequest.stringCreatedAt = (d.toString()).substring(0,10);
 
 
 
