@@ -5,6 +5,20 @@ angular
     $scope.showSpinner = true;
     $scope.dataId = undefined;
 
+    $scope.refresh = function(){
+      var query = new Parse.Query(UserParse);
+      query.equalTo("objectId",UserParse.current().id);
+
+      query.first().then(function(user) {
+        $scope.$apply( function () {
+          $scope.user = user;
+          $scope.showSpinner = false;
+        });
+       }, function(error) {
+        supersonic.logger.info("Error: " + error.code + " " + error.message);
+      });
+    }
+
     supersonic.ui.views.current.whenVisible(function() {
       supersonic.logger.info("my profile visible");
       $scope.refresh();
@@ -13,20 +27,6 @@ angular
     $scope.edit = function(){
       var editView = new supersonic.ui.View("user#edit?id=" + $scope.user.id);
       supersonic.ui.modal.show(editView, {animate: true});
-    }
-
-    $scope.refresh = function(){
-      var query = new Parse.Query(UserParse);
-      query.equalTo("objectId",UserParse.current().id);
-
-      query.find().then(function(users) {
-        $scope.$apply( function () {
-          $scope.user = users[0];
-          $scope.showSpinner = false;
-        });
-       },function(error) {
-        supersonic.logger.info("Error: " + error.code + " " + error.message);
-      });
     }
 
     $scope.logout = function(){

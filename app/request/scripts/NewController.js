@@ -12,13 +12,8 @@ angular
 
       newrequest.author_name = UserParse.current().get('firstName') + ' ' + UserParse.current().get('lastName');
 
-
-     
       var d=new Date();
       newrequest.stringCreatedAt = (d.toString()).substring(0,10);
-
-
-
 
       newrequest.save().then( function () {
         UserParse.current().addUnique("requests", newrequest.id);
